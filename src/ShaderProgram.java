@@ -67,4 +67,8 @@ public class ShaderProgram {
             glUniformMatrix4fv(uniforms.get(uniformName), false, floatBuffer);
         }
     }
+
+    public void setUniforms(String uniformName, int value){
+        glUniform1i(uniforms.get(uniformName), value);
+    }
 }

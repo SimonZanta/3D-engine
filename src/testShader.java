@@ -88,6 +88,8 @@ public class testShader {
 
         glViewport(0,0,800,600);
 
+        //enable z-buffer
+        glEnable(GL_DEPTH_TEST);
 
         //load shaders from file
         String shaderVertSrc = Utils.readFile("resources/shaders/shader.vert");
@@ -102,31 +104,7 @@ public class testShader {
 
         shaderProgram.createUniform("projectionMatrix");
         shaderProgram.createUniform("worldMatrix");
-
-        glEnable(GL_DEPTH_TEST);
-
-//        float[] triangle =  {
-//                -0.5f, -0.5f, 0.0f,
-//                0.5f, -0.5f, 0.0f,
-//                0.0f,  0.5f, 0.0f
-//        };
-//
-//        // every vertex is on independent line -
-//        float[] rectangle = new float[]{
-//                -0.5f,  0.5f, -5.05f,
-//                -0.5f, -0.5f, -5.05f,
-//                0.5f, -0.5f, -5.05f,
-//                0.5f,  0.5f, -5.05f,
-//        };
-//        int[] rectangleIndx = new int[]{
-//                0, 1, 3, 3, 1, 2,
-//        };
-//        float[] colors = new float[]{
-//                0.5f, 0.0f, 0.0f,
-//                0.0f, 0.5f, 0.0f,
-//                0.0f, 0.0f, 0.5f,
-//                0.0f, 0.5f, 0.5f,
-//        };
+        shaderProgram.createUniform("te");
 
         float[] positions = new float[] {
                 // VO
@@ -179,7 +157,6 @@ public class testShader {
         meshList.add(mesh);
 
         gameItems = new ArrayList<>();
-        gameItems.add(new GameItem(mesh));
         gameItems.add(new GameItem(mesh));
 
 
