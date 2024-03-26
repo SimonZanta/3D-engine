@@ -24,6 +24,7 @@ public class Renderer {
         shaderProgram.bind();
         Matrix4f projectionMatrix = transformation.getProjectionMat(fov, 800, 600, zNear, zFar);
         shaderProgram.setUniform("projectionMatrix", projectionMatrix);
+        shaderProgram.setUniform("textureSampler", 0);
 
 
         for(GameItem gameItem : gameItems){
@@ -35,7 +36,7 @@ public class Renderer {
 
             shaderProgram.setUniform("worldMatrix", worldMatrix);
 
-            float rotation = gameItem.getRotation().x + 0.005f;
+            float rotation = gameItem.getRotation().x + 1.5f;
             if ( rotation > 360 ) {
                 rotation = 0;
             }

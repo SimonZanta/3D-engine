@@ -10,13 +10,17 @@ import static org.lwjgl.system.MemoryUtil.memFree;
 
 public class Mesh {
     private final int vaoId;
-    private final int colorVboId;
+//    private final int colorVboId;
     private final int texVboId;
     private final int vboPosId;
     private final int vboInxId;
     private final int vertexCount;
 
     public Mesh(float[] positions, int[] indices, float[] texCoords, Texture texture){
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture.getTextId());
+
+
         vertexCount = indices.length;
         FloatBuffer verticesBuffer = null;
         FloatBuffer texCoordsBuffer = null;
@@ -76,7 +80,7 @@ public class Mesh {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glDeleteBuffers(vboPosId);
         glDeleteBuffers(vboInxId);
-        glDeleteBuffers(colorVboId);
+        glDeleteBuffers(texVboId);
 
         // Delete the VAO
         glBindVertexArray(0);

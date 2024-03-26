@@ -7,6 +7,7 @@ import static org.lwjgl.opengl.GL11C.*;
 import static org.lwjgl.opengl.GL30C.glGenerateMipmap;
 
 public class Texture {
+    private final int textId;
     public Texture(String filename) throws IOException {
         PNGDecoder decoder = new PNGDecoder(
                 Texture.class.getResourceAsStream(filename));
@@ -15,7 +16,7 @@ public class Texture {
         decoder.decode(buf, decoder.getWidth() * 4, PNGDecoder.Format.RGBA);
         buf.flip();
 
-        int textId = glGenTextures();
+        textId = glGenTextures();
 
         glBindTexture(GL_TEXTURE_2D, textId);
 
@@ -26,5 +27,9 @@ public class Texture {
                 0, GL_RGBA, GL_UNSIGNED_BYTE, buf);
 
         glGenerateMipmap(GL_TEXTURE_2D);
+    }
+
+    public int getTextId() {
+        return textId;
     }
 }
