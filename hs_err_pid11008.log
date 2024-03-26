@@ -18,7 +18,7 @@
 
 ---------------  S U M M A R Y ------------
 
-Command Line: -javaagent:D:\apps\intellijU\IntelliJ IDEA 2023.3.3\lib\idea_rt.jar=65111:D:\apps\intellijU\IntelliJ IDEA 2023.3.3\bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 testShader
+Command Line: -javaagent:D:\apps\intellijU\IntelliJ IDEA 2023.3.3\lib\idea_rt.jar=65111:D:\apps\intellijU\IntelliJ IDEA 2023.3.3\bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 game.Run
 
 Host: AMD Ryzen 5 4600H with Radeon Graphics         , 12 cores, 15G,  Windows 11 , 64 bit Build 22000 (10.0.22000.2538)
 Time: Wed Mar 20 16:12:23 2024 Stindows 11 , 64 bit Build 22000 (10.0.22000.2538) elapsed time: 0.525127 seconds (0d 0h 0m 0s)
@@ -34,8 +34,8 @@ C  [lwjgl_opengl.dll+0xc53a]
 Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
 j  org.lwjgl.opengl.GL11C.glEnable(I)V+0
 j  org.lwjgl.opengl.GL11.glEnable(I)V+1
-j  testShader.init()V+203
-j  testShader.main([Ljava/lang/String;)V+7
+j  game.Run.init()V+203
+j  game.Run.main([Ljava/lang/String;)V+7
 v  ~StubRoutines::call_stub 0x000001eb8753100e
 
 siginfo: EXCEPTION_ACCESS_VIOLATION (0xc0000005), reading address 0x0000000000000000
@@ -656,16 +656,16 @@ GC Heap History (0 events):
 No events
 
 Dll operation events (12 events):
-Event: 0.005 Loaded shared library C:\Users\šimon\.jdks\openjdk-19.0.2\bin\java.dll
-Event: 0.012 Loaded shared library C:\Users\šimon\.jdks\openjdk-19.0.2\bin\jsvml.dll
-Event: 0.090 Loaded shared library C:\Users\šimon\.jdks\openjdk-19.0.2\bin\zip.dll
-Event: 0.092 Loaded shared library C:\Users\šimon\.jdks\openjdk-19.0.2\bin\instrument.dll
-Event: 0.097 Loaded shared library C:\Users\šimon\.jdks\openjdk-19.0.2\bin\net.dll
-Event: 0.098 Loaded shared library C:\Users\šimon\.jdks\openjdk-19.0.2\bin\nio.dll
-Event: 0.100 Loaded shared library C:\Users\šimon\.jdks\openjdk-19.0.2\bin\zip.dll
+Event: 0.005 Loaded shared library C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\java.dll
+Event: 0.012 Loaded shared library C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\jsvml.dll
+Event: 0.090 Loaded shared library C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\zip.dll
+Event: 0.092 Loaded shared library C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\instrument.dll
+Event: 0.097 Loaded shared library C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\net.dll
+Event: 0.098 Loaded shared library C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\nio.dll
+Event: 0.100 Loaded shared library C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\zip.dll
 Event: 0.168 Loaded shared library D:\apps\intellijU\IntelliJ IDEA 2023.3.3\bin\breakgen64.dll
-Event: 0.174 Loaded shared library C:\Users\šimon\.jdks\openjdk-19.0.2\bin\extnet.dll
-Event: 0.199 Loaded shared library C:\Users\šimon\.jdks\openjdk-19.0.2\bin\jimage.dll
+Event: 0.174 Loaded shared library C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\extnet.dll
+Event: 0.199 Loaded shared library C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\jimage.dll
 Event: 0.226 Loaded shared library D:\temp\lwjgl_simon\3.3.3+5\x64\lwjgl.dll
 Event: 0.512 Loaded shared library D:\temp\lwjgl_simon\3.3.3+5\x64\lwjgl_opengl.dll
 
@@ -790,13 +790,13 @@ Event: 0.473 Thread 0x000001eb9fd2afa0 Thread exited: 0x000001eb9fd2afa0
 
 
 Dynamic libraries:
-0x00007ff6782d0000 - 0x00007ff6782de000 	C:\Users\šimon\.jdks\openjdk-19.0.2\bin\java.exe
+0x00007ff6782d0000 - 0x00007ff6782de000 	C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\java.exe
 0x00007ff90bec0000 - 0x00007ff90c0c9000 	C:\Windows\SYSTEM32\ntdll.dll
 0x00007ff90a8e0000 - 0x00007ff90a99d000 	C:\Windows\System32\KERNEL32.DLL
 0x00007ff9096d0000 - 0x00007ff909a54000 	C:\Windows\System32\KERNELBASE.dll
 0x00007ff909b00000 - 0x00007ff909c11000 	C:\Windows\System32\ucrtbase.dll
-0x00007ff902d40000 - 0x00007ff902d57000 	C:\Users\šimon\.jdks\openjdk-19.0.2\bin\jli.dll
-0x00007ff8ffbf0000 - 0x00007ff8ffc0b000 	C:\Users\šimon\.jdks\openjdk-19.0.2\bin\VCRUNTIME140.dll
+0x00007ff902d40000 - 0x00007ff902d57000 	C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\jli.dll
+0x00007ff8ffbf0000 - 0x00007ff8ffc0b000 	C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\VCRUNTIME140.dll
 0x00007ff90a0b0000 - 0x00007ff90a25d000 	C:\Windows\System32\USER32.dll
 0x00007ff9095e0000 - 0x00007ff909606000 	C:\Windows\System32\win32u.dll
 0x00007ff8f86d0000 - 0x00007ff8f8975000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22000.120_none_9d947278b86cc467\COMCTL32.dll
@@ -805,9 +805,9 @@ Dynamic libraries:
 0x00007ff909fa0000 - 0x00007ff90a043000 	C:\Windows\System32\msvcrt.dll
 0x00007ff909a60000 - 0x00007ff909afd000 	C:\Windows\System32\msvcp_win.dll
 0x00007ff90a9a0000 - 0x00007ff90a9d1000 	C:\Windows\System32\IMM32.DLL
-0x00007ff902d30000 - 0x00007ff902d3c000 	C:\Users\šimon\.jdks\openjdk-19.0.2\bin\vcruntime140_1.dll
-0x00007ff8d45f0000 - 0x00007ff8d467e000 	C:\Users\šimon\.jdks\openjdk-19.0.2\bin\msvcp140.dll
-0x00007ff8552a0000 - 0x00007ff855f60000 	C:\Users\šimon\.jdks\openjdk-19.0.2\bin\server\jvm.dll
+0x00007ff902d30000 - 0x00007ff902d3c000 	C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\vcruntime140_1.dll
+0x00007ff8d45f0000 - 0x00007ff8d467e000 	C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\msvcp140.dll
+0x00007ff8552a0000 - 0x00007ff855f60000 	C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\server\jvm.dll
 0x00007ff90a9e0000 - 0x00007ff90aa8e000 	C:\Windows\System32\ADVAPI32.dll
 0x00007ff90b500000 - 0x00007ff90b59e000 	C:\Windows\System32\sechost.dll
 0x00007ff90a5d0000 - 0x00007ff90a6f1000 	C:\Windows\System32\RPCRT4.dll
@@ -816,13 +816,13 @@ Dynamic libraries:
 0x00007ff8e62a0000 - 0x00007ff8e62a9000 	C:\Windows\SYSTEM32\WSOCK32.dll
 0x00007ff90b410000 - 0x00007ff90b47f000 	C:\Windows\System32\WS2_32.dll
 0x00007ff908380000 - 0x00007ff908398000 	C:\Windows\SYSTEM32\kernel.appcore.dll
-0x00007ff9001d0000 - 0x00007ff9001da000 	C:\Users\šimon\.jdks\openjdk-19.0.2\bin\jimage.dll
+0x00007ff9001d0000 - 0x00007ff9001da000 	C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\jimage.dll
 0x00007ff906ad0000 - 0x00007ff906cf1000 	C:\Windows\SYSTEM32\DBGHELP.DLL
 0x00007ff8ecdd0000 - 0x00007ff8ece01000 	C:\Windows\SYSTEM32\dbgcore.DLL
 0x00007ff909c90000 - 0x00007ff909d0f000 	C:\Windows\System32\bcryptPrimitives.dll
-0x00007ff8f0100000 - 0x00007ff8f010e000 	C:\Users\šimon\.jdks\openjdk-19.0.2\bin\instrument.dll
-0x00007ff8fd890000 - 0x00007ff8fd8b6000 	C:\Users\šimon\.jdks\openjdk-19.0.2\bin\java.dll
-0x00007ff886db0000 - 0x00007ff886e87000 	C:\Users\šimon\.jdks\openjdk-19.0.2\bin\jsvml.dll
+0x00007ff8f0100000 - 0x00007ff8f010e000 	C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\instrument.dll
+0x00007ff8fd890000 - 0x00007ff8fd8b6000 	C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\java.dll
+0x00007ff886db0000 - 0x00007ff886e87000 	C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\jsvml.dll
 0x00007ff90b6b0000 - 0x00007ff90be75000 	C:\Windows\System32\SHELL32.dll
 0x00007ff9073e0000 - 0x00007ff907c42000 	C:\Windows\SYSTEM32\windows.storage.dll
 0x00007ff90afa0000 - 0x00007ff90b316000 	C:\Windows\System32\combase.dll
@@ -830,13 +830,13 @@ Dynamic libraries:
 0x00007ff90b320000 - 0x00007ff90b40a000 	C:\Windows\System32\SHCORE.dll
 0x00007ff90a050000 - 0x00007ff90a0ad000 	C:\Windows\System32\shlwapi.dll
 0x00007ff909280000 - 0x00007ff9092a5000 	C:\Windows\SYSTEM32\profapi.dll
-0x00007ff8de550000 - 0x00007ff8de568000 	C:\Users\šimon\.jdks\openjdk-19.0.2\bin\zip.dll
-0x00007ff8df8a0000 - 0x00007ff8df8b3000 	C:\Users\šimon\.jdks\openjdk-19.0.2\bin\net.dll
+0x00007ff8de550000 - 0x00007ff8de568000 	C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\zip.dll
+0x00007ff8df8a0000 - 0x00007ff8df8b3000 	C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\net.dll
 0x00007ff902e60000 - 0x00007ff902f74000 	C:\Windows\SYSTEM32\WINHTTP.dll
 0x00007ff908820000 - 0x00007ff908887000 	C:\Windows\system32\mswsock.dll
-0x00007ff8de570000 - 0x00007ff8de586000 	C:\Users\šimon\.jdks\openjdk-19.0.2\bin\nio.dll
+0x00007ff8de570000 - 0x00007ff8de586000 	C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\nio.dll
 0x00007ff8de530000 - 0x00007ff8de54a000 	D:\apps\intellijU\IntelliJ IDEA 2023.3.3\bin\breakgen64.dll
-0x00007ff8ecb50000 - 0x00007ff8ecb58000 	C:\Users\šimon\.jdks\openjdk-19.0.2\bin\extnet.dll
+0x00007ff8ecb50000 - 0x00007ff8ecb58000 	C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\extnet.dll
 0x00007ff890f50000 - 0x00007ff890fcb000 	D:\temp\lwjgl_simon\3.3.3+5\x64\lwjgl.dll
 0x00007ff885580000 - 0x00007ff885602000 	D:\temp\lwjgl_simon\3.3.3+5\x64\glfw.dll
 0x00007ff8b91d0000 - 0x00007ff8b9215000 	C:\Windows\SYSTEM32\dinput8.dll
@@ -874,11 +874,11 @@ Dynamic libraries:
 0x00007ff888b60000 - 0x00007ff888bbe000 	D:\temp\lwjgl_simon\3.3.3+5\x64\lwjgl_opengl.dll
 
 dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
-symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Users\šimon\.jdks\openjdk-19.0.2\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22000.120_none_9d947278b86cc467;C:\Users\šimon\.jdks\openjdk-19.0.2\bin\server;D:\apps\intellijU\IntelliJ IDEA 2023.3.3\bin;D:\temp\lwjgl_simon\3.3.3+5\x64;C:\Windows\System32\DriverStore\FileRepository\u0361612.inf_amd64_b679e02f70413f9f\B361368
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22000.120_none_9d947278b86cc467;C:\Users\ï¿½imon\.jdks\openjdk-19.0.2\bin\server;D:\apps\intellijU\IntelliJ IDEA 2023.3.3\bin;D:\temp\lwjgl_simon\3.3.3+5\x64;C:\Windows\System32\DriverStore\FileRepository\u0361612.inf_amd64_b679e02f70413f9f\B361368
 
 VM Arguments:
 jvm_args: -javaagent:D:\apps\intellijU\IntelliJ IDEA 2023.3.3\lib\idea_rt.jar=65111:D:\apps\intellijU\IntelliJ IDEA 2023.3.3\bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 
-java_command: testShader
+java_command: game.Run
 java_class_path (initial): D:\skola\uhk\rok2\PGRF2\OpenGL\project\shader\Task2\out\production\Task2;D:\apps\lwjgl\joml\joml-1.9.9.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-egl.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-ktx.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-lz4.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-nfd.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-ovr.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-par.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-sse.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-stb.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-vma.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-bgfx.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-cuda.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-fmod.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-glfw.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-jawt.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-llvm.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-lmdb.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-meow.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-odbc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-opus.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-spvc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-yoga.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-zstd.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-hwloc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-assimp.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-nanovg.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-openal.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-opencl.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-opengl.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-openvr.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-openxr.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-tinyfd.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-tootle.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-vulkan.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-xxhash.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-nuklear.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-shaderc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-tinyexr.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-freetype.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-harfbuzz.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-jemalloc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-opengles.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-remotery.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-rpmalloc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-libdivide.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-egl-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-egl-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-ktx-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-ktx-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-lz4-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-lz4-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-nfd-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-nfd-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-ovr-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-ovr-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-par-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-par-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-sse-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-sse-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-stb-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-stb-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-vma-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-vma-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-bgfx-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-bgfx-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-cuda-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-cuda-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-fmod-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-fmod-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-glfw-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-glfw-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-jawt-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-jawt-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-llvm-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-llvm-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-lmdb-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-lmdb-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-meow-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-meow-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-odbc-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-odbc-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-opus-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-opus-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-spvc-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-spvc-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-yoga-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-yoga-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-zstd-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-zstd-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-hwloc-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-hwloc-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-meshoptimizer.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-assimp-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-assimp-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-nanovg-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-nanovg-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-openal-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-openal-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-opencl-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-opencl-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-opengl-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-opengl-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-openvr-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-openvr-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-openxr-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-openxr-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-tinyfd-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-tinyfd-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-tootle-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-tootle-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-vulkan-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-vulkan-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-xxhash-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-xxhash-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-nuklear-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-nuklear-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-shaderc-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-shaderc-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-tinyexr-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-tinyexr-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-freetype-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-freetype-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-harfbuzz-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-harfbuzz-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-jemalloc-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-jemalloc-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-opengles-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-opengles-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-remotery-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-remotery-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-rpmalloc-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-rpmalloc-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-libdivide-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-libdivide-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-ktx-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-lz4-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-nfd-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-ovr-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-par-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-sse-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-stb-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-vma-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-bgfx-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-glfw-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-llvm-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-lmdb-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-meow-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-opus-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-spvc-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-yoga-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-zstd-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-hwloc-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-meshoptimizer-javadoc.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-meshoptimizer-sources.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-assimp-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-nanovg-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-openal-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-opengl-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-openvr-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-openxr-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-tinyfd-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-tootle-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-xxhash-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-nuklear-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-shaderc-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-tinyexr-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-freetype-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-harfbuzz-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-jemalloc-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-opengles-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-remotery-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-rpmalloc-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-libdivide-natives-windows.jar;D:\apps\lwjgl\lwjgl-release-3.3.3-custom\lwjgl-meshoptimizer-natives-windows.jar;D:\apps\lwjgl\pngDecoder\pngdecoder-1.0.jar
 Launcher Type: SUN_STANDARD
 
@@ -912,7 +912,7 @@ Log output configuration:
 
 Environment Variables:
 JAVA_HOME=D:\apps\JDK
-PATH=C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;D:\apps\JDK\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\gsudo\;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\GitHub CLI\;C:\Program Files\swipl\bin;C:\Program Files\nodejs\;C:\Program Files\PostgreSQL\16\bin;;C:\Program Files\Docker\Docker\resources\bin;C:\Users\šimon\AppData\Local\Programs\Python\Launcher\;C:\Users\šimon\AppData\Local\Microsoft\WindowsApps;D:\apps\VScode\Microsoft VS Code\bin;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.3.2\bin;;D:\progamming\globalDependenciesNode;C:\ghc\ghc-9.4.7-x86_64-unknown-mingw32\bin;C:\Users\šimon\AppData\Roaming\npm
+PATH=C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;D:\apps\JDK\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\gsudo\;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\GitHub CLI\;C:\Program Files\swipl\bin;C:\Program Files\nodejs\;C:\Program Files\PostgreSQL\16\bin;;C:\Program Files\Docker\Docker\resources\bin;C:\Users\ï¿½imon\AppData\Local\Programs\Python\Launcher\;C:\Users\ï¿½imon\AppData\Local\Microsoft\WindowsApps;D:\apps\VScode\Microsoft VS Code\bin;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.3.2\bin;;D:\progamming\globalDependenciesNode;C:\ghc\ghc-9.4.7-x86_64-unknown-mingw32\bin;C:\Users\ï¿½imon\AppData\Roaming\npm
 USERNAME=simon
 OS=Windows_NT
 PROCESSOR_IDENTIFIER=AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD

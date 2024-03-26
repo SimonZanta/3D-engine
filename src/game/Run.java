@@ -1,88 +1,32 @@
+package game;
 
-import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
-import org.lwjgl.glfw.GLFWVidMode;
+import engine.*;
+import engine.item.GameItem;
+import engine.item.Mesh;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.system.MemoryStack;
+import render.GameLoop;
+import render.Renderer;
+import render.Window;
 
-import java.io.File;
-import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.ARBVertexArrayObject.glBindVertexArray;
 import static org.lwjgl.opengl.ARBVertexArrayObject.glGenVertexArrays;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.glClearColor;
-import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.system.MemoryStack.stackPush;
-import static org.lwjgl.system.MemoryUtil.NULL;
 import static org.lwjgl.system.MemoryUtil.memFree;
 
-public class testShader {
-    private int width=800, height=600;
-    private long window;
-    private ShaderProgram shaderProgram;
-    private Mesh mesh;
-    private Renderer renderer;
-    private List<GameItem> gameItems;
+public class Run {
 
     public void init() throws Exception {
 
         //init glfw for window creation
         glfwInit();
 
-        //add context - version to glfw
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-
-        //create window of size 800/600 with title idkTest
-        window = glfwCreateWindow(width, height, "idkTest", NULL, NULL);
-
-        if(window == NULL) {
-            throw new RuntimeException("Failed to create the GLFW window");
-        }
-
-        glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
-            if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-                glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
-        });
-
-        glfwSetFramebufferSizeCallback(window, new GLFWFramebufferSizeCallback() {
-            @Override
-            public void invoke(long window, int width, int height) {
-                if (width > 0 && height > 0 &&
-                        (testShader.this.width != width || testShader.this.height != height)) {
-                    testShader.this.width = width;
-                    testShader.this.height = height;
-                }
-            }
-        });
-
-        // Get the thread stack and push a new frame
-        try ( MemoryStack stack = stackPush() ) {
-            IntBuffer pWidth = stack.mallocInt(1); // int*
-            IntBuffer pHeight = stack.mallocInt(1); // int*
-
-            // Get the window size passed to glfwCreateWindow
-            glfwGetWindowSize(window, pWidth, pHeight);
-
-            // Get the resolution of the primary monitor
-            GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-
-            // Center the window
-            glfwSetWindowPos(
-                    window,
-                    (vidmode.width() - pWidth.get(0)) / 2,
-                    (vidmode.height() - pHeight.get(0)) / 2
-            );
-        }
+        Window window = new Window(800, 600);
 
         //add interactivity to glfw
-        glfwMakeContextCurrent(window);
+        glfwMakeContextCurrent(window.getWindow());
 
         //initialize OpenGL, without this, nothing will happen
         GL.createCapabilities();
@@ -96,12 +40,12 @@ public class testShader {
         String shaderVertSrc = Utils.readFile("resources/shaders/shader.vert");
         String shaderFragSrc = Utils.readFile("resources/shaders/shader.frag");
 
-        shaderProgram = new ShaderProgram();
+        ShaderProgram shaderProgram = new ShaderProgram();
         shaderProgram.createVertShader(shaderVertSrc);
         shaderProgram.createFragShader(shaderFragSrc);
         shaderProgram.link();
 
-        renderer = new Renderer(shaderProgram);
+        Renderer renderer = new Renderer(shaderProgram);
 
         shaderProgram.createUniform("projectionMatrix");
         shaderProgram.createUniform("worldMatrix");
@@ -217,31 +161,22 @@ public class testShader {
 
 
         List<Mesh> meshList = new ArrayList<>();
-//        mesh = new Mesh(positions, indices, colours);
-        mesh = new Mesh(positions, indices, texCoords, new Texture("model/cube/cube.png"));
+//        mesh = new engine.item.Mesh(positions, indices, colours);
+        Mesh mesh = new Mesh(positions, indices, texCoords, new Texture("/model/cube/cube.png"));
         meshList.add(mesh);
 
-        gameItems = new ArrayList<>();
+        List<GameItem> gameItems = new ArrayList<>();
         gameItems.add(new GameItem(mesh));
 
+        GameLoop gameLoop = new GameLoop(renderer, window);
+        gameLoop.play(gameItems);
 
-        gameLoop();
-
-        //destroy window when is purge time
-        glfwDestroyWindow(window);
+        //destroy window
+        glfwDestroyWindow(window.getWindow());
         glfwTerminate();
     }
 
-    private void gameLoop() {
-        while(!glfwWindowShouldClose(window)){
-            renderer.render(gameItems);
-            glfwSwapInterval(1);
-            glfwSwapBuffers(window);
-            glfwPollEvents();
-        }
-    }
-
     public static void main(String[] args) throws Exception {
-        new testShader().init();
+        new Run().init();
     }
 }

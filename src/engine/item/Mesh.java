@@ -1,5 +1,7 @@
+package engine.item;
+
+import engine.Texture;
 import org.lwjgl.system.MemoryUtil;
-import org.w3c.dom.Text;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;

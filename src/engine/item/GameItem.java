@@ -1,4 +1,5 @@
-import org.joml.Vector3d;
+package engine.item;
+
 import org.joml.Vector3f;
 
 public class GameItem {
