@@ -24,6 +24,8 @@ public class Renderer {
         shaderProgram.bind();
         Matrix4f projectionMatrix = transformation.getProjectionMat(fov, 800, 600, zNear, zFar);
         shaderProgram.setUniform("projectionMatrix", projectionMatrix);
+        shaderProgram.setUniform("textureSampler", 0);
+
 
         for(GameItem gameItem : gameItems){
 

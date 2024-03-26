@@ -1,4 +1,5 @@
 import org.lwjgl.system.MemoryUtil;
+import org.w3c.dom.Text;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -9,22 +10,27 @@ import static org.lwjgl.system.MemoryUtil.memFree;
 
 public class Mesh {
     private final int vaoId;
-    private final int colorVboId;
+//    private final int colorVboId;
+    private final int texVboId;
     private final int vboPosId;
     private final int vboInxId;
     private final int vertexCount;
 
-    public Mesh(float[] positions, int[] indices, float[] colors){
+    public Mesh(float[] positions, int[] indices, float[] texCoords, Texture texture){
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture.getTextId());
+
+
         vertexCount = indices.length;
         FloatBuffer verticesBuffer = null;
-        FloatBuffer colorBuffer = null;
+        FloatBuffer texCoordsBuffer = null;
         IntBuffer indexBuffer = null;
         try {
             verticesBuffer = MemoryUtil.memAllocFloat(positions.length);
             verticesBuffer.put(positions).flip();
 
-            colorBuffer = MemoryUtil.memAllocFloat(colors.length);
-            colorBuffer.put(colors).flip();
+            texCoordsBuffer = MemoryUtil.memAllocFloat(texCoords.length);
+            texCoordsBuffer.put(texCoords).flip();
 
             indexBuffer = MemoryUtil.memAllocInt(indices.length);
             indexBuffer.put(indices).flip();
@@ -43,13 +49,13 @@ public class Mesh {
             glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
             glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-            colorVboId = glGenBuffers();
-            glBindBuffer(GL_ARRAY_BUFFER, colorVboId);
-            glBufferData(GL_ARRAY_BUFFER, colorBuffer, GL_STATIC_DRAW);
+            texVboId = glGenBuffers();
+            glBindBuffer(GL_ARRAY_BUFFER, texVboId);
+            glBufferData(GL_ARRAY_BUFFER, texCoordsBuffer, GL_STATIC_DRAW);
 
             // index is set to 1, because its next attrib in vert shader
-            glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, 0);
-            memFree(colorBuffer);
+            glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
+            memFree(texCoordsBuffer);
 
             glBindVertexArray(0);
         } finally {
@@ -74,7 +80,7 @@ public class Mesh {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glDeleteBuffers(vboPosId);
         glDeleteBuffers(vboInxId);
-        glDeleteBuffers(colorVboId);
+        glDeleteBuffers(texVboId);
 
         // Delete the VAO
         glBindVertexArray(0);
