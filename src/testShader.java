@@ -193,6 +193,7 @@ public class testShader {
     private void gameLoop() {
         while(!glfwWindowShouldClose(window)){
             renderer.render(gameItems);
+            glfwSwapInterval(1);
             glfwSwapBuffers(window);
             glfwPollEvents();
         }
