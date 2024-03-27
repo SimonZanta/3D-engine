@@ -1,5 +1,6 @@
 package render;
 
+import engine.Camera;
 import engine.item.GameItem;
 import engine.ShaderProgram;
 import engine.Transformation;
@@ -17,9 +18,12 @@ public class Renderer {
     private float zNear = 0.01f;
     private float zFar = 1000.f;
 
+    private Camera camera;
+
     public Renderer(ShaderProgram shaderProgram) throws Exception {
         this.shaderProgram = shaderProgram;
         this.transformation = new Transformation();
+        this.camera = new Camera();
     }
 
     public void render(List<GameItem> gameItems){
@@ -28,17 +32,16 @@ public class Renderer {
         shaderProgram.bind();
         Matrix4f projectionMatrix = transformation.getProjectionMat(fov, 800, 600, zNear, zFar);
         shaderProgram.setUniform("projectionMatrix", projectionMatrix);
+
+        Matrix4f viewMatrix = transformation.getViewMatrix(camera);
+
         shaderProgram.setUniform("textureSampler", 0);
 
 
         for(GameItem gameItem : gameItems){
 
-            Matrix4f worldMatrix = transformation.getWorldMat(
-                                        gameItem.getPosition(),
-                                        gameItem.getRotation(),
-                                        gameItem.getScale());
-
-            shaderProgram.setUniform("worldMatrix", worldMatrix);
+            Matrix4f modelViewMatrix = transformation.getModelViewMatrix(gameItem, viewMatrix);
+            shaderProgram.setUniform("modelViewMatrix", modelViewMatrix);
 
             float rotation = gameItem.getRotation().x + 1.5f;
             if ( rotation > 360 ) {

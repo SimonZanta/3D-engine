@@ -60,7 +60,7 @@ public class Run {
 
         //create uniforms
         shaderProgram.createUniform("projectionMatrix");
-        shaderProgram.createUniform("worldMatrix");
+        shaderProgram.createUniform("modelViewMatrix");
         shaderProgram.createUniform("textureSampler");
 
 //      ----------- OBJECT INIT -----------------------------------------------------
