@@ -12,10 +12,8 @@ import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.system.MemoryUtil.memFree;
 
 public class Mesh {
-
     private static final Vector3f defaultColor = new Vector3f(1.f, 1.f, 1.f);
     private final int vaoId;
-//    private final int colorVboId;
     private final int texVboId;
     private final int normalVboId;
     private final int vboPosId;
