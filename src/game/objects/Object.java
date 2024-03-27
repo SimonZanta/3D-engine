@@ -10,14 +10,20 @@ public abstract class Object {
     protected abstract int[] getIndices();
     protected abstract float[] getTexCoords();
     protected abstract Texture getTexture();
+    protected  abstract  float[] getNormals();
 
     public Mesh createMesh(){
         float[] positions = getPositions();
         int[] indices = getIndices();
         float[] texCoords = getTexCoords();
-        Texture texture = getTexture();
+        float[] normals = getNormals();
 
-        return new Mesh(positions, indices, texCoords, texture);
+        Mesh returnMesh =  new Mesh(positions, indices, texCoords, normals);
+
+        if(getTexture() != null){
+            returnMesh.setTexture(getTexture());
+        }
+        return returnMesh;
     }
 
     public GameItem createGameItem(){

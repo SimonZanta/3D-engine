@@ -61,7 +61,10 @@ public class Run {
         //create uniforms
         shaderProgram.createUniform("projectionMatrix");
         shaderProgram.createUniform("modelViewMatrix");
-        shaderProgram.createUniform("textureSampler");
+        shaderProgram.createUniform("tex_sampler");
+
+        shaderProgram.createUniform("color");
+        shaderProgram.createUniform("useColor");
 
 //      ----------- OBJECT INIT -----------------------------------------------------
         //TODO create scene, rather than gameItems themselves

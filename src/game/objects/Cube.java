@@ -10,6 +10,7 @@ public class Cube extends Object{
     private final float[] texCoords;
     private final float[] positions;
     private final Texture texture;
+    private final float[] normals;
     public Cube(String texturePath) throws IOException {
 
         texture = new Texture(texturePath);
@@ -76,6 +77,46 @@ public class Cube extends Object{
                 // V19: V2 repeated
                 0.5f, -0.5f, 0.5f
         };
+
+        //chatbot did it so chance of working are close to 0
+        normals = new float[] {
+                // Front face
+                0.0f, 0.0f, 1.0f,  // V0
+                0.0f, 0.0f, 1.0f,  // V1
+                0.0f, 0.0f, 1.0f,  // V2
+                0.0f, 0.0f, 1.0f,  // V3
+
+                // Back face
+                0.0f, 0.0f, -1.0f, // V4
+                0.0f, 0.0f, -1.0f, // V5
+                0.0f, 0.0f, -1.0f, // V6
+                0.0f, 0.0f, -1.0f, // V7
+
+                // Top face
+                0.0f, 1.0f, 0.0f,  // V8
+                0.0f, 1.0f, 0.0f,  // V9
+                0.0f, 1.0f, 0.0f,  // V10
+                0.0f, 1.0f, 0.0f,  // V11
+
+                // Bottom face
+                0.0f, -1.0f, 0.0f, // V12
+                0.0f, -1.0f, 0.0f, // V13
+                0.0f, -1.0f, 0.0f, // V14
+                0.0f, -1.0f, 0.0f, // V15
+
+                // Left face
+                -1.0f, 0.0f, 0.0f, // V16
+                -1.0f, 0.0f, 0.0f, // V17
+                -1.0f, 0.0f, 0.0f, // V18
+                -1.0f, 0.0f, 0.0f, // V19
+
+                // Right face
+                1.0f, 0.0f, 0.0f,  // V20
+                1.0f, 0.0f, 0.0f,  // V21
+                1.0f, 0.0f, 0.0f,  // V22
+                1.0f, 0.0f, 0.0f   // V23
+        };
+
         texCoords = new float[]{
                 0.0f, 0.0f,
                 0.0f, 0.5f,
@@ -143,5 +184,10 @@ public class Cube extends Object{
     @Override
     protected Texture getTexture() {
         return texture;
+    }
+
+    @Override
+    protected float[] getNormals() {
+        return normals;
     }
 }
