@@ -4,6 +4,8 @@ import engine.Texture;
 import engine.item.GameItem;
 import engine.item.Mesh;
 
+import java.util.Arrays;
+
 public abstract class Object {
 
     protected abstract float[] getPositions();

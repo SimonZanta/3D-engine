@@ -39,7 +39,6 @@ public class Renderer {
 
 
         for(GameItem gameItem : gameItems){
-
             Matrix4f modelViewMatrix = transformation.getModelViewMatrix(gameItem, viewMatrix);
 
             shaderProgram.setUniform("modelViewMatrix", modelViewMatrix);
