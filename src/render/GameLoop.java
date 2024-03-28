@@ -17,9 +17,9 @@ public class GameLoop {
         this.window = window;
     }
 
-    public void play(List<GameItem> gameItems, PointLight pointLight, Vector3f ambientLight){
+    public void play(List<GameItem> gameItems, Vector3f ambientLight){
         while(!glfwWindowShouldClose(window.getWindow())){
-            renderer.render(gameItems, pointLight, ambientLight);
+            renderer.render(gameItems, ambientLight);
             glfwSwapInterval(1);
             glfwSwapBuffers(window.getWindow());
             glfwPollEvents();

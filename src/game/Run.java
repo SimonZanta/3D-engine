@@ -63,10 +63,9 @@ public class Run {
         //create uniforms
         shaderProgram.createUniform("projectionMatrix");
         shaderProgram.createUniform("modelViewMatrix");
+
         shaderProgram.createUniform("tex_sampler");
 
-//        shaderProgram.createUniform("color");
-//        shaderProgram.createUniform("useColor");
 
         shaderProgram.createMaterialUniform("material");
         shaderProgram.createUniform("specularPower");
@@ -82,16 +81,10 @@ public class Run {
         gameItems.add(cube);
 
         Vector3f ambientLight = new Vector3f(0.3f, 0.3f, 0.3f);
-        Vector3f lightColour = new Vector3f(1, 1, 1);
-        Vector3f lightPosition = new Vector3f(0, 0, 1);
-        float lightIntensity = 1.0f;
-        PointLight pointLight = new PointLight(lightColour, lightPosition, lightIntensity);
-        PointLight.Attenuation att = new PointLight.Attenuation(0.0f, 0.0f, 1.0f);
-        pointLight.setAttenuation(att);
 
 //      ----------- GAME LOOP -------------------------------------------------------
         GameLoop gameLoop = new GameLoop(renderer, window);
-        gameLoop.play(gameItems, pointLight, ambientLight);
+        gameLoop.play(gameItems, ambientLight);
 
         //destroy window
         glfwDestroyWindow(window.getWindow());

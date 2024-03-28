@@ -78,45 +78,6 @@ public class Cube extends Object{
                 0.5f, -0.5f, 0.5f
         };
 
-        //chatbot did it so chance of working are close to 0
-        normals = new float[] {
-                // Front face
-                0.0f, 0.0f, 1.0f,  // V0
-                0.0f, 0.0f, 1.0f,  // V1
-                0.0f, 0.0f, 1.0f,  // V2
-                0.0f, 0.0f, 1.0f,  // V3
-
-                // Back face
-                0.0f, 0.0f, -1.0f, // V4
-                0.0f, 0.0f, -1.0f, // V5
-                0.0f, 0.0f, -1.0f, // V6
-                0.0f, 0.0f, -1.0f, // V7
-
-                // Top face
-                0.0f, 1.0f, 0.0f,  // V8
-                0.0f, 1.0f, 0.0f,  // V9
-                0.0f, 1.0f, 0.0f,  // V10
-                0.0f, 1.0f, 0.0f,  // V11
-
-                // Bottom face
-                0.0f, -1.0f, 0.0f, // V12
-                0.0f, -1.0f, 0.0f, // V13
-                0.0f, -1.0f, 0.0f, // V14
-                0.0f, -1.0f, 0.0f, // V15
-
-                // Left face
-                -1.0f, 0.0f, 0.0f, // V16
-                -1.0f, 0.0f, 0.0f, // V17
-                -1.0f, 0.0f, 0.0f, // V18
-                -1.0f, 0.0f, 0.0f, // V19
-
-                // Right face
-                1.0f, 0.0f, 0.0f,  // V20
-                1.0f, 0.0f, 0.0f,  // V21
-                1.0f, 0.0f, 0.0f,  // V22
-                1.0f, 0.0f, 0.0f   // V23
-        };
-
         texCoords = new float[]{
                 0.0f, 0.0f,
                 0.0f, 0.5f,
@@ -163,6 +124,7 @@ public class Cube extends Object{
                 // Back face
                 4, 6, 7, 5, 4, 7
         };
+        normals = calculateNormals(positions, indices);
     }
 
 
@@ -189,5 +151,66 @@ public class Cube extends Object{
     @Override
     protected float[] getNormals() {
         return normals;
+    }
+
+
+    public static float[] calculateNormals(float[] positions, int[] indices) {
+        int numVertices = positions.length / 3;
+        float[] normals = new float[numVertices * 3];
+
+        for (int i = 0; i < numVertices; i++) {
+            normals[i * 3] = 0;
+            normals[i * 3 + 1] = 0;
+            normals[i * 3 + 2] = 0;
+        }
+
+        for (int i = 0; i < indices.length; i += 3) {
+            int i1 = indices[i] * 3;
+            int i2 = indices[i + 1] * 3;
+            int i3 = indices[i + 2] * 3;
+
+            float[] v1 = {positions[i1], positions[i1 + 1], positions[i1 + 2]};
+            float[] v2 = {positions[i2], positions[i2 + 1], positions[i2 + 2]};
+            float[] v3 = {positions[i3], positions[i3 + 1], positions[i3 + 2]};
+
+            float[] normal = calculateFaceNormal(v1, v2, v3);
+
+            for (int j = 0; j < 3; j++) {
+                normals[indices[i] * 3 + j] += normal[j];
+                normals[indices[i + 1] * 3 + j] += normal[j];
+                normals[indices[i + 2] * 3 + j] += normal[j];
+            }
+        }
+
+        for (int i = 0; i < numVertices; i++) {
+            float length = (float) Math.sqrt(normals[i * 3] * normals[i * 3] +
+                    normals[i * 3 + 1] * normals[i * 3 + 1] +
+                    normals[i * 3 + 2] * normals[i * 3 + 2]);
+            if (length != 0) {
+                normals[i * 3] /= length;
+                normals[i * 3 + 1] /= length;
+                normals[i * 3 + 2] /= length;
+            }
+        }
+
+        return normals;
+    }
+
+    private static float[] calculateFaceNormal(float[] v1, float[] v2, float[] v3) {
+        float[] normal = new float[3];
+
+        float[] edge1 = new float[3];
+        float[] edge2 = new float[3];
+
+        for (int i = 0; i < 3; i++) {
+            edge1[i] = v2[i] - v1[i];
+            edge2[i] = v3[i] - v1[i];
+        }
+
+        normal[0] = edge1[1] * edge2[2] - edge1[2] * edge2[1];
+        normal[1] = edge1[2] * edge2[0] - edge1[0] * edge2[2];
+        normal[2] = edge1[0] * edge2[1] - edge1[1] * edge2[0];
+
+        return normal;
     }
 }
