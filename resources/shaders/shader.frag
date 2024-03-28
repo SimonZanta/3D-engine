@@ -4,22 +4,6 @@ in vec2 outTexCoord;
 
 out vec4 fragColor;
 
-struct Attenuation
-{
-	float constant;
-	float linear;
-	float exponent;
-};
-
-struct PointLight
-{
-	vec3 colour;
-// Light position is assumed to be in view coordinates
-	vec3 position;
-	float intensity;
-	Attenuation att;
-};
-
 struct Material
 {
 	vec4 ambient;
@@ -31,9 +15,7 @@ struct Material
 
 uniform sampler2D texture_sampler;
 uniform vec3 ambientLight;
-uniform float specularPower;
 uniform Material material;
-uniform PointLight pointLight;
 
 vec4 ambientC;
 vec4 diffuseC;
