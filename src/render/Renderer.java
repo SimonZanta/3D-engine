@@ -42,7 +42,8 @@ public class Renderer {
             Matrix4f modelViewMatrix = transformation.getModelViewMatrix(gameItem, viewMatrix);
 
             shaderProgram.setUniform("modelViewMatrix", modelViewMatrix);
-            shaderProgram.setUniform("color", gameItem.getMesh().getColor());
+//            shaderProgram.setUniform("color", gameItem.getMesh().getColor());
+            System.out.println(gameItem.getMesh().isTextured());
             shaderProgram.setUniform("useColor", gameItem.getMesh().isTextured() ? 0 : 1);
 
             float rotation = gameItem.getRotation().x + 1.5f;

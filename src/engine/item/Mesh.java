@@ -1,5 +1,6 @@
 package engine.item;
 
+import engine.Material;
 import engine.Texture;
 import org.joml.Vector3f;
 import org.lwjgl.system.MemoryUtil;
@@ -19,12 +20,14 @@ public class Mesh {
     private final int vboPosId;
     private final int vboInxId;
     private final int vertexCount;
-    private Texture texture;
-    private Vector3f color;
+    private Material material;
+//    private Texture texture;
+//    private Vector3f color;
 
     public Mesh(float[] positions, int[] indices, float[] texCoords, float[] normals){
 
-        color = Mesh.defaultColor;
+//        color = Mesh.defaultColor;
+        material = new Material();
         vertexCount = indices.length;
 
         FloatBuffer verticesBuffer = null;
@@ -81,20 +84,24 @@ public class Mesh {
     }
 
     public void setTexture(Texture texture) {
-        this.texture = texture;
+        this.material.setTexture(texture);
     }
 
     public boolean isTextured(){
-        return texture != null;
+        return material.isTextured();
     }
 
-    public Vector3f getColor() {
-        return color;
+    public Material getMaterial() {
+        return material;
     }
 
-    public void setColor(Vector3f color) {
-        this.color = color;
-    }
+    //    public Vector3f getColor() {
+//        return material.getAmbientColour();
+//    }
+
+//    public void setColor(Vector3f color) {
+//        this.color = color;
+//    }
 
     public int getVaoId() {
         return vaoId;
@@ -121,9 +128,9 @@ public class Mesh {
 
     public void render(){
         //bind texture if it exists
-        if(texture != null){
+        if(isTextured()){
             glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, texture.getTextId());
+            glBindTexture(GL_TEXTURE_2D, material.getTexture().getTextId());
         }
 
         glBindVertexArray(getVaoId());
