@@ -3,7 +3,9 @@ package game;
 import engine.*;
 import engine.item.GameItem;
 import engine.item.Mesh;
+import engine.ligh.PointLight;
 import game.objects.Cube;
+import org.joml.Vector3f;
 import org.lwjgl.opengl.GL;
 import render.GameLoop;
 import render.Renderer;
@@ -63,8 +65,13 @@ public class Run {
         shaderProgram.createUniform("modelViewMatrix");
         shaderProgram.createUniform("tex_sampler");
 
-        shaderProgram.createUniform("color");
-        shaderProgram.createUniform("useColor");
+//        shaderProgram.createUniform("color");
+//        shaderProgram.createUniform("useColor");
+
+        shaderProgram.createMaterialUniform("material");
+        shaderProgram.createUniform("specularPower");
+        shaderProgram.createUniform("ambientLight");
+        shaderProgram.createPointLightUniform("pointLight");
 
 //      ----------- OBJECT INIT -----------------------------------------------------
         //TODO create scene, rather than gameItems themselves
@@ -74,9 +81,17 @@ public class Run {
 
         gameItems.add(cube);
 
+        Vector3f ambientLight = new Vector3f(0.3f, 0.3f, 0.3f);
+        Vector3f lightColour = new Vector3f(1, 1, 1);
+        Vector3f lightPosition = new Vector3f(0, 0, 1);
+        float lightIntensity = 1.0f;
+        PointLight pointLight = new PointLight(lightColour, lightPosition, lightIntensity);
+        PointLight.Attenuation att = new PointLight.Attenuation(0.0f, 0.0f, 1.0f);
+        pointLight.setAttenuation(att);
+
 //      ----------- GAME LOOP -------------------------------------------------------
         GameLoop gameLoop = new GameLoop(renderer, window);
-        gameLoop.play(gameItems);
+        gameLoop.play(gameItems, pointLight, ambientLight);
 
         //destroy window
         glfwDestroyWindow(window.getWindow());

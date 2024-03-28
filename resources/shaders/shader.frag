@@ -17,10 +17,6 @@ uniform sampler2D tex_sampler;
 uniform vec3 color;
 uniform int useColor;
 
-vec4 ambientC;
-vec4 diffC;
-vec4 specC;
-
 struct Attenuation{
 	float constant;
 	float linear;
@@ -47,6 +43,10 @@ uniform float specularPower;
 uniform Material material;
 uniform PointLight pointLight;
 uniform vec3 camera_pos;
+
+vec4 ambientC;
+vec4 diffC;
+vec4 specC;
 
 void setupCol(Material material, vec2 outTexCoord){
 	if(material.hasTexture == 1){
@@ -76,8 +76,8 @@ vec4 calcPointLight(PointLight pointLight, vec3 normal, vec3 pos){
 	specFactor = pow(specFactor, specularPower);
 	specColor = specC * specFactor * material.reflectance * vec4(pointLight.color, 1.0);
 
-	float dist = length(lightDir);
-	float attenInv = pointLight.att.constant + pointLight.att.linear * dist + pointLight.att.exponent * dist * dist;
+	float distance = length(lightDir);
+	float attenInv = pointLight.att.constant + pointLight.att.linear * distance + pointLight.att.exponent * distance * distance;
 	return (diffColor + specColor) / attenInv;
 }
 

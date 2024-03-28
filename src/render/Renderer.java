@@ -4,7 +4,10 @@ import engine.Camera;
 import engine.item.GameItem;
 import engine.ShaderProgram;
 import engine.Transformation;
+import engine.ligh.PointLight;
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 import java.util.List;
 
@@ -17,16 +20,17 @@ public class Renderer {
     private float fov = (float) Math.toRadians(60.0f);
     private float zNear = 0.01f;
     private float zFar = 1000.f;
-
     private Camera camera;
+    private float specularPower;
 
     public Renderer(ShaderProgram shaderProgram) throws Exception {
         this.shaderProgram = shaderProgram;
         this.transformation = new Transformation();
         this.camera = new Camera();
+        this.specularPower = 10f;
     }
 
-    public void render(List<GameItem> gameItems){
+    public void render(List<GameItem> gameItems, PointLight pointLight, Vector3f ambientLight){
         clearWindow();
 
         shaderProgram.bind();
@@ -36,15 +40,25 @@ public class Renderer {
         Matrix4f viewMatrix = transformation.getViewMatrix(camera);
 
         shaderProgram.setUniform("tex_sampler", 0);
+        shaderProgram.setUniform("ambientLight", ambientLight);
+        shaderProgram.setUniform("specularPower", specularPower);
+
+        PointLight currPointLight = new PointLight(pointLight);
+        Vector3f lightPos = currPointLight.getPosition();
+        Vector4f aux = new Vector4f(lightPos, 1);
+        aux.mul(viewMatrix);
+        lightPos.x = aux.x;
+        lightPos.y = aux.y;
+        lightPos.z = aux.z;
+
+        shaderProgram.setUniform("pointLight", currPointLight);
 
 
         for(GameItem gameItem : gameItems){
             Matrix4f modelViewMatrix = transformation.getModelViewMatrix(gameItem, viewMatrix);
 
             shaderProgram.setUniform("modelViewMatrix", modelViewMatrix);
-//            shaderProgram.setUniform("color", gameItem.getMesh().getColor());
-            System.out.println(gameItem.getMesh().isTextured());
-            shaderProgram.setUniform("useColor", gameItem.getMesh().isTextured() ? 0 : 1);
+//            shaderProgram.setUniform("useColor", gameItem.getMesh().isTextured() ? 0 : 1);
 
             float rotation = gameItem.getRotation().x + 1.5f;
             if ( rotation > 360 ) {
@@ -53,7 +67,8 @@ public class Renderer {
             gameItem.setRotation(rotation, rotation, rotation);
 
             gameItem.setPosition(0,0,-5);
-
+            shaderProgram.setUniform("material", gameItem.getMesh().getMaterial());
+            
             gameItem.getMesh().render();
         }
 

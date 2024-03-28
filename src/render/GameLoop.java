@@ -1,6 +1,8 @@
 package render;
 
 import engine.item.GameItem;
+import engine.ligh.PointLight;
+import org.joml.Vector3f;
 
 import java.util.List;
 
@@ -15,9 +17,9 @@ public class GameLoop {
         this.window = window;
     }
 
-    public void play(List<GameItem> gameItems){
+    public void play(List<GameItem> gameItems, PointLight pointLight, Vector3f ambientLight){
         while(!glfwWindowShouldClose(window.getWindow())){
-            renderer.render(gameItems);
+            renderer.render(gameItems, pointLight, ambientLight);
             glfwSwapInterval(1);
             glfwSwapBuffers(window.getWindow());
             glfwPollEvents();
