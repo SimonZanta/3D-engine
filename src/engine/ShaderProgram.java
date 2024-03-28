@@ -92,9 +92,9 @@ public class ShaderProgram {
         createUniform(uniformName + ".color");
         createUniform(uniformName + ".position");
         createUniform(uniformName + ".intensity");
-        createUniform(uniformName + ".att.constant");
-        createUniform(uniformName + ".att.linear");
-        createUniform(uniformName + ".att.exponent");
+        createUniform(uniformName + ".constant");
+        createUniform(uniformName + ".linear");
+        createUniform(uniformName + ".exponent");
     }
 
     public void createMaterialUniform(String uniformName){
@@ -109,9 +109,9 @@ public class ShaderProgram {
         setUniform(uniformName + ".color", pointLight.getColor());
         setUniform(uniformName + ".position", pointLight.getPosition());
         setUniform(uniformName + ".intensity", pointLight.getIntensity());
-        setUniform(uniformName + ".att.constant", pointLight.getAttenuation().getConstant());
-        setUniform(uniformName + ".att.linear", pointLight.getAttenuation().getLinear());
-        setUniform(uniformName + ".att.exponent", pointLight.getAttenuation().getExponent());
+        setUniform(uniformName + ".constant", pointLight.getAttenuation().getConstant());
+        setUniform(uniformName + ".linear", pointLight.getAttenuation().getLinear());
+        setUniform(uniformName + ".exponent", pointLight.getAttenuation().getExponent());
     }
 
     public void setUniform(String uniformName, Material material){

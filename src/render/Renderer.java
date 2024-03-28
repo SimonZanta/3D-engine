@@ -30,7 +30,7 @@ public class Renderer {
         this.specularPower = 10f;
     }
 
-    public void render(List<GameItem> gameItems, Vector3f ambientLight){
+    public void render(List<GameItem> gameItems, Vector3f ambientLight, PointLight pointLight){
         clearWindow();
 
         shaderProgram.bind();
@@ -42,20 +42,21 @@ public class Renderer {
         shaderProgram.setUniform("tex_sampler", 0);
         shaderProgram.setUniform("ambientLight", ambientLight);
         shaderProgram.setUniform("specularPower", specularPower);
+        shaderProgram.setUniform("pointLight", pointLight);
 
 
         for(GameItem gameItem : gameItems){
             Matrix4f modelViewMatrix = transformation.getModelViewMatrix(gameItem, viewMatrix);
 
             shaderProgram.setUniform("modelViewMatrix", modelViewMatrix);
-//            shaderProgram.setUniform("useColor", gameItem.getMesh().isTextured() ? 0 : 1);
 
-//            float rotation = gameItem.getRotation().x + 1.5f;
-//            if ( rotation > 360 ) {
-//                rotation = 0;
-//            }
-            gameItem.setRotation(5, 180, 0);
+            float rotation = gameItem.getRotation().x + 1.5f;
+            if ( rotation > 360 ) {
+                rotation = 0;
+            }
+//            gameItem.setRotation(5, 180, 0);
 
+            gameItem.setRotation(rotation, rotation, 0);
             gameItem.setPosition(0,1,-5);
 
             shaderProgram.setUniform("material", gameItem.getMesh().getMaterial());

@@ -66,10 +66,10 @@ public class Run {
 
         shaderProgram.createUniform("tex_sampler");
 
-
         shaderProgram.createMaterialUniform("material");
         shaderProgram.createUniform("specularPower");
         shaderProgram.createUniform("ambientLight");
+
         shaderProgram.createPointLightUniform("pointLight");
 
 //      ----------- OBJECT INIT -----------------------------------------------------
@@ -82,9 +82,13 @@ public class Run {
 
         Vector3f ambientLight = new Vector3f(0.3f, 0.3f, 0.3f);
 
+        Vector3f lightPos = new Vector3f(0,0,-2);
+        Vector3f lightColor = new Vector3f(1f,1f,1f);
+        PointLight pointLight = new PointLight(lightColor, lightPos, 10f, new PointLight.Attenuation(0,0,1));
+
 //      ----------- GAME LOOP -------------------------------------------------------
         GameLoop gameLoop = new GameLoop(renderer, window);
-        gameLoop.play(gameItems, ambientLight);
+        gameLoop.play(gameItems, ambientLight, pointLight);
 
         //destroy window
         glfwDestroyWindow(window.getWindow());

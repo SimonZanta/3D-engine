@@ -9,8 +9,8 @@ layout (location =2) in vec3 inVertexNormal;
 //out vec3 exColor;
 
 out vec2 outTexCoord;
-out vec3 outmvVertexNormal;
-out vec3 outmvVertexPos;
+out vec3 fragNormal;
+out vec3 fragPos;
 
 uniform mat4 projectionMatrix;
 uniform mat4 modelViewMatrix;
@@ -19,6 +19,6 @@ void main() {
     vec4 mvPos = modelViewMatrix * vec4(inPosition, 1.0);
     gl_Position = projectionMatrix * mvPos;
     outTexCoord = inTexCoord;
-    outmvVertexNormal = normalize(modelViewMatrix * vec4(inVertexNormal, 0.0)).xyz;
-    outmvVertexPos = mvPos.xyz;
+    fragNormal = normalize(modelViewMatrix * vec4(inVertexNormal, 0.0)).xyz;
+    fragPos = mvPos.xyz;
 }
