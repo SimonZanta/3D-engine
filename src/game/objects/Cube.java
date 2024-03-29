@@ -10,10 +10,12 @@ public class Cube extends Object{
     private final float[] texCoords;
     private final float[] positions;
     private final Texture texture;
+    private final Texture normalMap;
     private final float[] normals;
-    public Cube(String texturePath) throws IOException {
+    public Cube(String texturePath, String normalMapPath) throws IOException {
 
         texture = new Texture(texturePath);
+        normalMap = new Texture(normalMapPath);
 
         float[] colours = new float[]{
                 0.5f, 0.0f, 0.0f,
@@ -146,6 +148,11 @@ public class Cube extends Object{
     @Override
     protected Texture getTexture() {
         return texture;
+    }
+
+    @Override
+    protected Texture getNormalMap() {
+        return normalMap;
     }
 
     @Override

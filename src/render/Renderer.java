@@ -39,7 +39,8 @@ public class Renderer {
 
         Matrix4f viewMatrix = transformation.getViewMatrix(camera);
 
-        shaderProgram.setUniform("tex_sampler", 0);
+        shaderProgram.setUniform("texture_sampler", 0);
+        shaderProgram.setUniform("normalMap", 1);
         shaderProgram.setUniform("ambientLight", ambientLight);
         shaderProgram.setUniform("specularPower", specularPower);
         shaderProgram.setUniform("pointLight", pointLight);
@@ -50,13 +51,13 @@ public class Renderer {
 
             shaderProgram.setUniform("modelViewMatrix", modelViewMatrix);
 
-            float rotation = gameItem.getRotation().x + 1.5f;
+            float rotation = gameItem.getRotation().y + 0.5f;
             if ( rotation > 360 ) {
                 rotation = 0;
             }
 //            gameItem.setRotation(5, 180, 0);
 
-            gameItem.setRotation(rotation, rotation, 0);
+            gameItem.setRotation(5, rotation, 0);
             gameItem.setPosition(0,1,-5);
 
             shaderProgram.setUniform("material", gameItem.getMesh().getMaterial());

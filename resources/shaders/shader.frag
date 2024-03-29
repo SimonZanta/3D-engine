@@ -3,6 +3,7 @@
 in vec2 outTexCoord;
 in vec3 fragPos;
 in vec3 fragNormal;
+in mat4 fragModelViewMatrix;
 
 out vec4 fragColor;
 
@@ -12,6 +13,7 @@ struct Material
 	vec4 diffuse;
 	vec4 specular;
 	int hasTexture;
+	int hasNormalMap; // implement
 	float reflectance;
 };
 
@@ -25,6 +27,7 @@ struct PointLight{
 };
 
 uniform sampler2D texture_sampler;
+uniform sampler2D normalMap; // implement
 uniform vec3 ambientLight;
 uniform Material material;
 uniform float specularPower;
@@ -77,11 +80,23 @@ vec4 calcPointLight(PointLight light, vec3 position, vec3 normal){
 	return lighColor / attenInv;
 }
 
+vec3 calcNormal(Material material, vec3 normal, vec2 textureCoord, mat4 MVM){
+	vec3 newNormal = normal;
+	if(material.hasNormalMap == 1){
+		newNormal = texture(normalMap, textureCoord).rgb;
+		newNormal = normalize((newNormal * 2) - 1);
+		newNormal = normalize(MVM * vec4(newNormal, 0.0)).xyz;
+	}
+	return newNormal;
+}
+
 void main()
 {
 	setupColours(material, outTexCoord);
 
-	vec4 diffuseSpecComp = calcPointLight(pointLight, fragPos, fragNormal);
+	vec3 calulatedNormal = calcNormal(material, fragNormal, outTexCoord, fragModelViewMatrix);
+
+	vec4 diffuseSpecComp = calcPointLight(pointLight, fragPos, calulatedNormal);
 
 	fragColor = ambientC * vec4(ambientLight, 1) + diffuseSpecComp;
 }

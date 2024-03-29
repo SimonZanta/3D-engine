@@ -1,5 +1,6 @@
 package engine;
 
+import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 public class Material {
@@ -15,12 +16,14 @@ public class Material {
     private float reflectance;
 
     private Texture texture;
+    private Texture normalTexture;
 
     public Material() {
         this.ambientColour = DEFAULT_COLOUR;
         this.diffuseColour = DEFAULT_COLOUR;
         this.specularColour = DEFAULT_COLOUR;
         this.texture = null;
+        this.normalTexture = null;
         this.reflectance = 0.0f;
     }
 
@@ -86,6 +89,18 @@ public class Material {
 
     public void setTexture(Texture texture) {
         this.texture = texture;
+    }
+
+    public boolean isNormalTexture() {
+        return this.normalTexture != null;
+    }
+
+    public Texture getNormalTexture() {
+        return normalTexture;
+    }
+
+    public void setNormalTexture(Texture texture) {
+        this.normalTexture = texture;
     }
 
 }

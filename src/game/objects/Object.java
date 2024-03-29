@@ -12,6 +12,7 @@ public abstract class Object {
     protected abstract int[] getIndices();
     protected abstract float[] getTexCoords();
     protected abstract Texture getTexture();
+    protected abstract Texture getNormalMap();
     protected  abstract  float[] getNormals();
 
     public Mesh createMesh(){
@@ -24,6 +25,10 @@ public abstract class Object {
 
         if(getTexture() != null){
             returnMesh.setTexture(getTexture());
+        }
+
+        if(getNormalMap() != null){
+            returnMesh.setNormalTexture(getNormalMap());
         }
         return returnMesh;
     }

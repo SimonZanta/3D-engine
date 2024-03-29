@@ -21,6 +21,7 @@ import static org.lwjgl.system.MemoryUtil.memFree;
 
 public class Run {
 
+    Vector3f lightPos;
     public static void main(String[] args) throws Exception {
         new Run().init();
     }
@@ -64,7 +65,8 @@ public class Run {
         shaderProgram.createUniform("projectionMatrix");
         shaderProgram.createUniform("modelViewMatrix");
 
-        shaderProgram.createUniform("tex_sampler");
+        shaderProgram.createUniform("texture_sampler");
+        shaderProgram.createUniform("normalMap");
 
         shaderProgram.createMaterialUniform("material");
         shaderProgram.createUniform("specularPower");
@@ -76,7 +78,7 @@ public class Run {
         //TODO create scene, rather than gameItems themselves
 
         List<GameItem> gameItems = new ArrayList<>();
-        GameItem cube = new Cube("/model/cube/cube.png").createGameItem();
+        GameItem cube = new Cube("/model/cube/rock.png", "/model/cube/rock_normals.png").createGameItem();
 //        Mesh cubeMesh = OBJLoader.loadMesh("/model/cube/cube.obj");
 //        GameItem cube = new GameItem(cubeMesh);
 
@@ -84,7 +86,7 @@ public class Run {
 
         Vector3f ambientLight = new Vector3f(0.3f, 0.3f, 0.3f);
 
-        Vector3f lightPos = new Vector3f(0,0,-2);
+        Vector3f lightPos = new Vector3f(0,1,-1);
         Vector3f lightColor = new Vector3f(1f,1f,1f);
         PointLight pointLight = new PointLight(lightColor, lightPos, 10f, new PointLight.Attenuation(0,0,1));
 
@@ -95,5 +97,10 @@ public class Run {
         //destroy window
         glfwDestroyWindow(window.getWindow());
         glfwTerminate();
+    }
+    public void input(Window window) {
+        if ( window.isKeyPressed(GLFW_KEY_RIGHT)) {
+            lightPos.y += 0.5f;
+        }
     }
 }

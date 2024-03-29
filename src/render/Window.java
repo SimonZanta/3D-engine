@@ -67,6 +67,9 @@ public class Window {
                     (vidmode.height() - pHeight.get(0)) / 2
             );
         }
-
     }
+    public boolean isKeyPressed(int keyCode) {
+        return glfwGetKey(window, keyCode) == GLFW_PRESS;
+    }
+
 }

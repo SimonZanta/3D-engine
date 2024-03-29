@@ -87,21 +87,21 @@ public class Mesh {
         this.material.setTexture(texture);
     }
 
+    public void setNormalTexture(Texture texture) {
+        this.material.setNormalTexture(texture);
+    }
+
     public boolean isTextured(){
         return material.isTextured();
+    }
+
+    public boolean isNormalTexture(){
+        return material.isNormalTexture();
     }
 
     public Material getMaterial() {
         return material;
     }
-
-    //    public Vector3f getColor() {
-//        return material.getAmbientColour();
-//    }
-
-//    public void setColor(Vector3f color) {
-//        this.color = color;
-//    }
 
     public int getVaoId() {
         return vaoId;
@@ -131,6 +131,13 @@ public class Mesh {
         if(isTextured()){
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, material.getTexture().getTextId());
+        }
+
+        if(isNormalTexture()){
+            // Activate first texture bank
+            glActiveTexture(GL_TEXTURE1);
+            // Bind the texture
+            glBindTexture(GL_TEXTURE_2D, material.getNormalTexture().getTextId());
         }
 
         glBindVertexArray(getVaoId());
