@@ -77,6 +77,8 @@ public class Run {
 
         List<GameItem> gameItems = new ArrayList<>();
         GameItem cube = new Cube("/model/cube/cube.png").createGameItem();
+//        Mesh cubeMesh = OBJLoader.loadMesh("/model/cube/cube.obj");
+//        GameItem cube = new GameItem(cubeMesh);
 
         gameItems.add(cube);
 
