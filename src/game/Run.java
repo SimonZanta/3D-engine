@@ -86,6 +86,7 @@ public class Run {
 
         Vector3f ambientLight = new Vector3f(0.3f, 0.3f, 0.3f);
 
+        //TODO: create light class, with visualizing where light is - sphere
         Vector3f lightPos = new Vector3f(0,1,-1);
         Vector3f lightColor = new Vector3f(1f,1f,1f);
         PointLight pointLight = new PointLight(lightColor, lightPos, 10f, new PointLight.Attenuation(0,0,1));
@@ -98,6 +99,7 @@ public class Run {
         glfwDestroyWindow(window.getWindow());
         glfwTerminate();
     }
+    //TODO implement movement
     public void input(Window window) {
         if ( window.isKeyPressed(GLFW_KEY_RIGHT)) {
             lightPos.y += 0.5f;

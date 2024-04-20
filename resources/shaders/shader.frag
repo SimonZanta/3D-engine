@@ -82,9 +82,10 @@ vec4 calcPointLight(PointLight light, vec3 position, vec3 normal){
 
 vec3 calcNormal(Material material, vec3 normal, vec2 textureCoord, mat4 MVM){
 	vec3 newNormal = normal;
-	if(material.hasNormalMap == 1){
+	if ( material.hasNormalMap == 1 )
+	{
 		newNormal = texture(normalMap, textureCoord).rgb;
-		newNormal = normalize((newNormal * 2) - 1);
+		newNormal = newNormal * 2 - 1;
 		newNormal = normalize(MVM * vec4(newNormal, 0.0)).xyz;
 	}
 	return newNormal;
@@ -99,4 +100,6 @@ void main()
 	vec4 diffuseSpecComp = calcPointLight(pointLight, fragPos, calulatedNormal);
 
 	fragColor = ambientC * vec4(ambientLight, 1) + diffuseSpecComp;
+
+	fragColor = vec4(calulatedNormal, 1.0); // Preview normals instead of 'result'
 }

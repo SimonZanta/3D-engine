@@ -30,6 +30,7 @@ public class Renderer {
         this.specularPower = 10f;
     }
 
+
     public void render(List<GameItem> gameItems, Vector3f ambientLight, PointLight pointLight){
         clearWindow();
 
@@ -39,28 +40,36 @@ public class Renderer {
 
         Matrix4f viewMatrix = transformation.getViewMatrix(camera);
 
+        PointLight currPointLight = new PointLight(pointLight);
+        Vector3f lightPos = currPointLight.getPosition();
+        Vector4f aux = new Vector4f(lightPos, 1);
+        aux.mul(viewMatrix);
+        lightPos.x = aux.x;
+        lightPos.y = aux.y;
+        lightPos.z = aux.z;
+
         shaderProgram.setUniform("texture_sampler", 0);
         shaderProgram.setUniform("normalMap", 1);
         shaderProgram.setUniform("ambientLight", ambientLight);
         shaderProgram.setUniform("specularPower", specularPower);
-        shaderProgram.setUniform("pointLight", pointLight);
+        shaderProgram.setUniform("pointLight", currPointLight);
 
 
         for(GameItem gameItem : gameItems){
+
+            shaderProgram.setUniform("material", gameItem.getMesh().getMaterial());
             Matrix4f modelViewMatrix = transformation.getModelViewMatrix(gameItem, viewMatrix);
 
             shaderProgram.setUniform("modelViewMatrix", modelViewMatrix);
+
 
             float rotation = gameItem.getRotation().y + 0.5f;
             if ( rotation > 360 ) {
                 rotation = 0;
             }
-//            gameItem.setRotation(5, 180, 0);
 
-            gameItem.setRotation(5, rotation, 0);
+            gameItem.setRotation(0, rotation, 0);
             gameItem.setPosition(0,1,-5);
-
-            shaderProgram.setUniform("material", gameItem.getMesh().getMaterial());
 
             gameItem.getMesh().render();
         }

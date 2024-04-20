@@ -22,6 +22,7 @@ void main() {
 
     outTexCoord = inTexCoord;
     fragNormal = normalize(modelViewMatrix * vec4(inVertexNormal, 0.0)).xyz;
+//    fragNormal = inVertexNormal;
     fragPos = mvPos.xyz;
     fragModelViewMatrix = modelViewMatrix;
 }

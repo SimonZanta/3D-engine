@@ -1,9 +1,11 @@
 package game.objects;
 
+import com.sun.tools.jconsole.JConsoleContext;
 import engine.Texture;
 import engine.item.Mesh;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Cube extends Object{
     private final int[] indices;
@@ -126,7 +128,33 @@ public class Cube extends Object{
                 // Back face
                 4, 6, 7, 5, 4, 7
         };
-        normals = calculateNormals(positions, indices);
+        normals= new float[]{
+                0.0f, 0.0f, 10.0f,
+                0.0f, 0.0f, 10.0f,
+                0.0f, 0.0f, 10.0f,
+                0.0f, 0.0f, 10.0f,
+
+                0.4472136f, 0.0f, 0.8944272f,
+                0.70710677f, 0.0f, 0.70710677f,
+                0.8944272f, 0.0f, 0.4472136f,
+                0.70710677f, 0.0f, 0.70710677f,
+
+                0.0f, 10.0f, 0.0f,
+                0.0f, 10.0f, 0.0f,
+                0.0f, 10.0f, 0.0f,
+                0.0f, 10.0f, 0.0f,
+
+                1.0f, 0.0f, 0.0f,
+                1.0f, 0.0f, 0.0f,
+                1.0f, 0.0f, 0.0f,
+                1.0f, 0.0f, 0.0f,
+
+                0.0f, 1.0f, 0.0f,
+                0.0f, 1.0f, 0.0f,
+                0.0f, 1.0f, 0.0f,
+                0.0f, 1.0f, 0.0f
+        };
+
     }
 
 
@@ -199,7 +227,6 @@ public class Cube extends Object{
                 normals[i * 3 + 2] /= length;
             }
         }
-
         return normals;
     }
 
