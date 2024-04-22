@@ -9,6 +9,7 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -23,24 +24,26 @@ public class Renderer {
     private Camera camera;
     private float specularPower;
 
-    public Renderer(ShaderProgram shaderProgram) throws Exception {
+    public Renderer(ShaderProgram shaderProgram, Camera newCamera) throws Exception {
         this.shaderProgram = shaderProgram;
         this.transformation = new Transformation();
-        this.camera = new Camera();
+        this.camera = newCamera;
         this.specularPower = 10f;
     }
 
 
-    public void render(List<GameItem> gameItems, Vector3f ambientLight, PointLight pointLight){
+    public void render(List<GameItem> gameItems, Vector3f ambientLight, PointLight pointLight) throws IOException {
         clearWindow();
 
         shaderProgram.bind();
         Matrix4f projectionMatrix = transformation.getProjectionMat(fov, 800, 600, zNear, zFar);
         shaderProgram.setUniform("projectionMatrix", projectionMatrix);
 
+//        camera.setLookDir()
+
         Matrix4f viewMatrix = transformation.getViewMatrix(camera);
 
-        PointLight currPointLight = new PointLight(pointLight);
+        PointLight currPointLight = pointLight;
         Vector3f lightPos = currPointLight.getPosition();
         Vector4f aux = new Vector4f(lightPos, 1);
         aux.mul(viewMatrix);
@@ -69,7 +72,6 @@ public class Renderer {
             }
 
             gameItem.setRotation(0, rotation, 0);
-            gameItem.setPosition(0,1,-5);
 
             gameItem.getMesh().render();
         }

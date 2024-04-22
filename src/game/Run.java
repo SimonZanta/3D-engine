@@ -2,29 +2,44 @@ package game;
 
 import engine.*;
 import engine.item.GameItem;
-import engine.item.Mesh;
 import engine.ligh.PointLight;
 import game.objects.Cube;
+import org.joml.Vector2d;
+import org.joml.Vector2f;
 import org.joml.Vector3f;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.glfw.GLFWCursorPosCallback;
+import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.opengl.GL;
 import render.GameLoop;
 import render.Renderer;
-import render.Window;
 
+import java.nio.DoubleBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.ARBVertexArrayObject.glGenVertexArrays;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.system.MemoryUtil.memFree;
+import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Run {
 
     Vector3f lightPos;
+    long window;
+    private Vector2d prevPos = new Vector2d(0,0);
+
+    private float MOVE_SPEED = 0.05f;
+    private float CAMERA_SPEED = 0.05f;
+
+    private boolean moveForward = false;
+    private boolean firstMove = true;
+    private double lastFrameTime;
+    Camera camera;
     public static void main(String[] args) throws Exception {
         new Run().init();
     }
+
+
     
     public void init() throws Exception {
 
@@ -32,10 +47,20 @@ public class Run {
         //init glfw for window creation
         glfwInit();
 
-        Window window = new Window(800, 600);
+        window = glfwCreateWindow(800, 600, "Zapoctovy Projekt Normalove Mapy   ", NULL, NULL);
+        if ( window == NULL )
+            throw new RuntimeException("Failed to create the GLFW window");
+
+        camera = new Camera();
+
+        lastFrameTime = glfwGetTime();
+
+        glfwSwapInterval(1);
+
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
         //add interactivity to glfw
-        glfwMakeContextCurrent(window.getWindow());
+        glfwMakeContextCurrent(window);
 
         //initialize OpenGL
         //don't write anything except window handling before this
@@ -49,8 +74,9 @@ public class Run {
 
 //      ----------- SHADER SETUP ----------------------------------------------------
 
+
         ShaderProgram shaderProgram = new ShaderProgram();
-        Renderer renderer = new Renderer(shaderProgram);
+        Renderer renderer = new Renderer(shaderProgram, camera);
 
 
         //load fragment and vertex shaders from file
@@ -79,10 +105,9 @@ public class Run {
 
         List<GameItem> gameItems = new ArrayList<>();
         GameItem cube = new Cube("/model/cube/rock.png", "/model/cube/rock_normals.png").createGameItem();
-//        Mesh cubeMesh = OBJLoader.loadMesh("/model/cube/cube.obj");
-//        GameItem cube = new GameItem(cubeMesh);
 
         gameItems.add(cube);
+
 
         Vector3f ambientLight = new Vector3f(0.3f, 0.3f, 0.3f);
 
@@ -90,19 +115,74 @@ public class Run {
         Vector3f lightPos = new Vector3f(0,1,-1);
         Vector3f lightColor = new Vector3f(1f,1f,1f);
         PointLight pointLight = new PointLight(lightColor, lightPos, 10f, new PointLight.Attenuation(0,0,1));
+        gameItems.add(pointLight.getGameItem());
 
 //      ----------- GAME LOOP -------------------------------------------------------
-        GameLoop gameLoop = new GameLoop(renderer, window);
-        gameLoop.play(gameItems, ambientLight, pointLight);
+
+        while(!glfwWindowShouldClose(window)){
+            double currentTime = glfwGetTime();
+            double deltaTime = currentTime - lastFrameTime;
+            lastFrameTime = currentTime;
+
+            updateCamera(deltaTime);
+
+            renderer.render(gameItems, ambientLight, pointLight);
+            glfwSwapInterval(1);
+            glfwSwapBuffers(window);
+            glfwPollEvents();
+        }
 
         //destroy window
-        glfwDestroyWindow(window.getWindow());
+        glfwDestroyWindow(window);
         glfwTerminate();
     }
-    //TODO implement movement
-    public void input(Window window) {
-        if ( window.isKeyPressed(GLFW_KEY_RIGHT)) {
-            lightPos.y += 0.5f;
-        }
+
+    public void updateCamera(double deltaTime){
+        float cameraSpeed = 1f;
+
+        System.out.println(deltaTime*10 * cameraSpeed);
+        System.out.println(cameraSpeed * 0.05 * (deltaTime * 1000.0f));
+//        float xd = (float) (deltaTime*100 * cameraSpeed);
+        float xd = (float) (cameraSpeed * 0.05 * (deltaTime * 1000.0f));
+
+        glfwSetCursorPosCallback(window, new GLFWCursorPosCallback() {
+            @Override
+            public void invoke(long window, double x, double y) {
+                if (firstMove) {
+                    prevPos.x = x;
+                    prevPos.y = y;
+                    firstMove = false;
+                }
+                float deltaX = (float)(x - prevPos.x);
+                float deltaY = (float)(y - prevPos.y);
+
+
+                prevPos.x = x;
+                prevPos.y = y;
+                camera.moveRotation(deltaX, deltaY);
+            }
+        });
+
+        glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
+            if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
+                glfwSetWindowShouldClose(window, true);
+
+            if(action == GLFW_PRESS || action == GLFW_REPEAT) {
+                switch (key) {
+                    case GLFW_KEY_W:
+                        camera.movePosition(0,0,-xd);
+                        break;
+                    case GLFW_KEY_A:
+                        camera.movePosition(-xd,0,0);
+                        break;
+                    case GLFW_KEY_S:
+                        camera.movePosition(0,0, xd);
+                        break;
+                    case GLFW_KEY_D:
+                        camera.movePosition(xd, 0,0);
+                        break;
+                }
+            }
+        });
     }
 }

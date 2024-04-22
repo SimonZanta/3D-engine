@@ -1,6 +1,10 @@
 package engine.ligh;
 
+import engine.item.GameItem;
+import game.objects.Cube;
 import org.joml.Vector3f;
+
+import java.io.IOException;
 
 public class PointLight {
     private Vector3f color;
@@ -11,21 +15,30 @@ public class PointLight {
 
     private Attenuation attenuation;
 
-    public PointLight(Vector3f color, Vector3f position, float intensity) {
+    private GameItem gameItem;
+
+    public PointLight(Vector3f color, Vector3f position, float intensity) throws IOException {
         attenuation = new Attenuation(1, 0, 0);
         this.color = color;
         this.position = position;
         this.intensity = intensity;
+        this.gameItem = new Cube().createGameItem();
+        this.gameItem.setPosition(position);
+        this.gameItem.setScale(0.5f);
     }
 
-    public PointLight(Vector3f color, Vector3f position, float intensity, Attenuation attenuation) {
+    public PointLight(Vector3f color, Vector3f position, float intensity, Attenuation attenuation) throws IOException {
         this(color, position, intensity);
         this.attenuation = attenuation;
     }
 
-    public PointLight(PointLight pointLight) {
+    public PointLight(PointLight pointLight) throws IOException {
         this(new Vector3f(pointLight.getColor()), new Vector3f(pointLight.getPosition()),
                 pointLight.getIntensity(), pointLight.getAttenuation());
+    }
+
+    public GameItem getGameItem() {
+        return gameItem;
     }
 
     public Vector3f getColor() {
@@ -42,6 +55,7 @@ public class PointLight {
 
     public void setPosition(Vector3f position) {
         this.position = position;
+        this.gameItem.setPosition(position);
     }
 
     public float getIntensity() {

@@ -25,6 +25,12 @@ public class GameItem {
         this.position.z = z;
     }
 
+    public void setPosition(Vector3f position){
+        this.position.x = position.x;
+        this.position.y = position.y;
+        this.position.z = position.z;
+    }
+
     public float getScale() {
         return scale;
     }

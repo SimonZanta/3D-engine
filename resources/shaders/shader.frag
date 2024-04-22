@@ -101,5 +101,5 @@ void main()
 
 	fragColor = ambientC * vec4(ambientLight, 1) + diffuseSpecComp;
 
-	fragColor = vec4(calulatedNormal, 1.0); // Preview normals instead of 'result'
+//	fragColor = vec4(calulatedNormal, 1.0); // Preview normals instead of 'result'
 }

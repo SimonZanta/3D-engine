@@ -1,5 +1,7 @@
 package engine;
 
+import org.joml.Math;
+import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
 public class Camera {
@@ -8,23 +10,11 @@ public class Camera {
     private final Vector3f rotation;
 
     public Camera() {
-        position = new Vector3f(0, 0, 0);
-        rotation = new Vector3f(0, 0, 0);
+        position = new Vector3f(0, 0, 5);
+        rotation = new Vector3f(0, 0, 1);
     }
-
-    public Camera(Vector3f position, Vector3f rotation) {
-        this.position = position;
-        this.rotation = rotation;
-    }
-
     public Vector3f getPosition() {
         return position;
-    }
-
-    public void setPosition(float x, float y, float z) {
-        position.x = x;
-        position.y = y;
-        position.z = z;
     }
 
     public void movePosition(float offsetX, float offsetY, float offsetZ) {
@@ -43,15 +33,10 @@ public class Camera {
         return rotation;
     }
 
-    public void setRotation(float x, float y, float z) {
-        rotation.x = x;
-        rotation.y = y;
-        rotation.z = z;
-    }
-
-    public void moveRotation(float offsetX, float offsetY, float offsetZ) {
-        rotation.x += offsetX;
-        rotation.y += offsetY;
-        rotation.z += offsetZ;
+    public void moveRotation(float x, float y) {
+        float scaledDeltaX = x * 0.05f;
+        float scaledDeltaY = y * 0.05f;
+        rotation.x += scaledDeltaY;
+        rotation.y += scaledDeltaX;
     }
 }
