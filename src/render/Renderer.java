@@ -39,8 +39,6 @@ public class Renderer {
         Matrix4f projectionMatrix = transformation.getProjectionMat(fov, 800, 600, zNear, zFar);
         shaderProgram.setUniform("projectionMatrix", projectionMatrix);
 
-//        camera.setLookDir()
-
         Matrix4f viewMatrix = transformation.getViewMatrix(camera);
 
         PointLight currPointLight = pointLight;
@@ -64,14 +62,6 @@ public class Renderer {
             Matrix4f modelViewMatrix = transformation.getModelViewMatrix(gameItem, viewMatrix);
 
             shaderProgram.setUniform("modelViewMatrix", modelViewMatrix);
-
-
-            float rotation = gameItem.getRotation().y + 0.5f;
-            if ( rotation > 360 ) {
-                rotation = 0;
-            }
-
-            gameItem.setRotation(0, rotation, 0);
 
             gameItem.getMesh().render();
         }

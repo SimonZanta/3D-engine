@@ -108,7 +108,6 @@ public class Run {
 
         gameItems.add(cube);
 
-
         Vector3f ambientLight = new Vector3f(0.3f, 0.3f, 0.3f);
 
         //TODO: create light class, with visualizing where light is - sphere
