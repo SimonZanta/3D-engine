@@ -3,18 +3,15 @@ package game;
 import engine.*;
 import engine.item.GameItem;
 import engine.ligh.PointLight;
-import game.objects.Cube;
+import engine.item.objects.Cube;
 import org.joml.Vector2d;
-import org.joml.Vector2f;
 import org.joml.Vector3f;
-import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
-import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.opengl.GL;
-import render.GameLoop;
 import render.Renderer;
+import render.WelcomeText;
 
-import java.nio.DoubleBuffer;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,17 +20,14 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Run {
-
-    Vector3f lightPos;
     long window;
-    private Vector2d prevPos = new Vector2d(0,0);
-
-    private float MOVE_SPEED = 0.05f;
-    private float CAMERA_SPEED = 0.05f;
-
-    private boolean moveForward = false;
+    private final Vector2d prevPos = new Vector2d(0,0);
     private boolean firstMove = true;
     private double lastFrameTime;
+
+    private GameItem cube;
+    private boolean isCubeTextured = true;
+    List<GameItem> gameItems = new ArrayList<>();
     Camera camera;
     public static void main(String[] args) throws Exception {
         new Run().init();
@@ -47,7 +41,7 @@ public class Run {
         //init glfw for window creation
         glfwInit();
 
-        window = glfwCreateWindow(800, 600, "Zapoctovy Projekt Normalove Mapy   ", NULL, NULL);
+        window = glfwCreateWindow(800, 600, "Zapoctovy Projekt Normalove Mapy", NULL, NULL);
         if ( window == NULL )
             throw new RuntimeException("Failed to create the GLFW window");
 
@@ -73,7 +67,7 @@ public class Run {
         glEnable(GL_DEPTH_TEST);
 
 //      ----------- SHADER SETUP ----------------------------------------------------
-
+        new WelcomeText().drawWelcomeText();
 
         ShaderProgram shaderProgram = new ShaderProgram();
         Renderer renderer = new Renderer(shaderProgram, camera);
@@ -102,19 +96,17 @@ public class Run {
 
 //      ----------- OBJECT INIT -----------------------------------------------------
         //TODO create scene, rather than gameItems themselves
+        cube = new Cube("/model/cube/rock.png", "/model/cube/rock_normals.png").createGameItem();
 
-        List<GameItem> gameItems = new ArrayList<>();
-        GameItem cube = new Cube("/model/cube/rock.png", "/model/cube/rock_normals.png").createGameItem();
-
-        gameItems.add(cube);
 
         Vector3f ambientLight = new Vector3f(0.3f, 0.3f, 0.3f);
 
-        //TODO: create light class, with visualizing where light is - sphere
-        Vector3f lightPos = new Vector3f(0,1,-1);
+        Vector3f lightPos = new Vector3f(1.5f,0, 1);
         Vector3f lightColor = new Vector3f(1f,1f,1f);
-        PointLight pointLight = new PointLight(lightColor, lightPos, 10f, new PointLight.Attenuation(0,0,1));
+        PointLight pointLight = new PointLight(lightColor, lightPos, 2f, new PointLight.Attenuation(0,0,1));
+
         gameItems.add(pointLight.getGameItem());
+        gameItems.add(cube);
 
 //      ----------- GAME LOOP -------------------------------------------------------
 
@@ -139,10 +131,7 @@ public class Run {
     public void updateCamera(double deltaTime){
         float cameraSpeed = 1f;
 
-        System.out.println(deltaTime*10 * cameraSpeed);
-        System.out.println(cameraSpeed * 0.05 * (deltaTime * 1000.0f));
-//        float xd = (float) (deltaTime*100 * cameraSpeed);
-        float xd = (float) (cameraSpeed * 0.05 * (deltaTime * 1000.0f));
+        float cameraMove = (float) (cameraSpeed * 0.05 * (deltaTime * 1000.0f));
 
         glfwSetCursorPosCallback(window, new GLFWCursorPosCallback() {
             @Override
@@ -167,19 +156,56 @@ public class Run {
                 glfwSetWindowShouldClose(window, true);
 
             if(action == GLFW_PRESS || action == GLFW_REPEAT) {
+                GameItem item = gameItems.get(1);
                 switch (key) {
                     case GLFW_KEY_W:
-                        camera.movePosition(0,0,-xd);
+                        camera.movePosition(0,0,-cameraMove);
                         break;
                     case GLFW_KEY_A:
-                        camera.movePosition(-xd,0,0);
+                        camera.movePosition(-cameraMove,0,0);
                         break;
                     case GLFW_KEY_S:
-                        camera.movePosition(0,0, xd);
+                        camera.movePosition(0,0, cameraMove);
                         break;
                     case GLFW_KEY_D:
-                        camera.movePosition(xd, 0,0);
+                        camera.movePosition(cameraMove, 0,0);
                         break;
+                    case GLFW_KEY_P:
+                        if(isCubeTextured){
+                            try {
+                                cube = new Cube().createGameItem();
+                                gameItems.remove(1);
+                                gameItems.add(cube);
+                                isCubeTextured = false;
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }else{
+                            try {
+                                cube = new Cube("/model/cube/rock.png", "/model/cube/rock_normals.png").createGameItem();
+                                gameItems.remove(1);
+                                gameItems.add(cube);
+                                isCubeTextured = true;
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        break;
+                    case GLFW_KEY_SPACE:
+                        if(item.isHasAnimation()){
+                            item.setHasAnimation(false);
+                        }else{
+                            item.setHasAnimation(true);
+                        }
+                        break;
+                    case GLFW_KEY_J:
+                        if(!item.isChangeAnimDirection()){
+                            item.setChangeAnimDirection(true);
+                        }else{
+                            item.setChangeAnimDirection(false);
+                        }
+                        break;
+
                 }
             }
         });

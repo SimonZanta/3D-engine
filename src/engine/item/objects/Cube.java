@@ -1,11 +1,8 @@
-package game.objects;
+package engine.item.objects;
 
-import com.sun.tools.jconsole.JConsoleContext;
 import engine.Texture;
-import engine.item.Mesh;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 public class Cube extends Object{
     private final int[] indices;
@@ -14,6 +11,7 @@ public class Cube extends Object{
     private final Texture texture;
     private final Texture normalMap;
     private final float[] normals;
+    private boolean hasAnimation = true;
     public Cube(String texturePath, String normalMapPath) throws IOException {
 
         texture = new Texture(texturePath);
@@ -128,31 +126,40 @@ public class Cube extends Object{
                 // Back face
                 4, 6, 7, 5, 4, 7
         };
-        normals= new float[]{
-                0.0f, 0.0f, 10.0f,
-                0.0f, 0.0f, 10.0f,
-                0.0f, 0.0f, 10.0f,
-                0.0f, 0.0f, 10.0f,
+//        normals= calculateNormals(positions, indices);
+        normals = new float[]{
+                0.0f, 0.7f, 0.7f,
+                0.0f, -0.7f, 0.7f,
+                0.7f, -0.7f, 0.0f,
+                0.7f, 0.7f, 0.0f,
+                0.0f, 0.7f, -0.7f,
+                0.7f, 0.7f, -0.7f,
+                0.0f, -0.7f, -0.7f,
+                0.7f, -0.7f, -0.7f,
 
-                0.4472136f, 0.0f, 0.8944272f,
-                0.70710677f, 0.0f, 0.70710677f,
-                0.8944272f, 0.0f, 0.4472136f,
-                0.70710677f, 0.0f, 0.70710677f,
-
-                0.0f, 10.0f, 0.0f,
-                0.0f, 10.0f, 0.0f,
-                0.0f, 10.0f, 0.0f,
-                0.0f, 10.0f, 0.0f,
-
-                1.0f, 0.0f, 0.0f,
-                1.0f, 0.0f, 0.0f,
-                1.0f, 0.0f, 0.0f,
-                1.0f, 0.0f, 0.0f,
-
+// Normály pro horní stěnu (duplicitní)
                 0.0f, 1.0f, 0.0f,
-                0.0f, 1.0f, 0.0f,
-                0.0f, 1.0f, 0.0f,
-                0.0f, 1.0f, 0.0f
+                0.5f, 1.0f, 0.0f,
+                0.0f, 1.0f, 0.5f,
+                0.5f, 1.0f, 0.5f,
+
+// Normály pro pravou stěnu (duplicitní)
+                0.5f, 0.0f, 0.0f,
+                0.5f, 0.5f, 0.0f,
+
+// Normály pro levou stěnu (duplicitní)
+                -0.5f, 0.0f, 0.0f,
+                -0.5f, 0.5f, 0.0f,
+
+// Normály pro spodní stěnu (duplicitní)
+                -0.5f, -0.5f, 0.0f,
+                0.5f, -0.5f, 0.0f,
+                -0.5f, -0.5f, 0.5f,
+                0.5f, -0.5f, 0.5f,
+
+// Normály pro zadní stěnu (duplicitní)
+                -0.5f, 0.0f, -0.5f,
+                -0.5f, 0.5f, -0.5f,
         };
 
     }
@@ -212,6 +219,9 @@ public class Cube extends Object{
 
     }
 
+    public boolean isHasAnimation() {
+        return hasAnimation;
+    }
 
     @Override
     protected float[] getPositions() {

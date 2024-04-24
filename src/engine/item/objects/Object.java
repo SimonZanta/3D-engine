@@ -1,10 +1,8 @@
-package game.objects;
+package engine.item.objects;
 
 import engine.Texture;
 import engine.item.GameItem;
 import engine.item.Mesh;
-
-import java.util.Arrays;
 
 public abstract class Object {
 
@@ -14,6 +12,7 @@ public abstract class Object {
     protected abstract Texture getTexture();
     protected abstract Texture getNormalMap();
     protected  abstract  float[] getNormals();
+    protected abstract boolean isHasAnimation();
 
     public Mesh createMesh(){
         float[] positions = getPositions();
@@ -34,7 +33,7 @@ public abstract class Object {
     }
 
     public GameItem createGameItem(){
-        return new GameItem(createMesh());
+        return new GameItem(createMesh(), isHasAnimation());
     }
 
 }

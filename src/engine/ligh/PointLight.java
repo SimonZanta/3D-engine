@@ -1,7 +1,7 @@
 package engine.ligh;
 
 import engine.item.GameItem;
-import game.objects.Cube;
+import engine.item.objects.Piramid;
 import org.joml.Vector3f;
 
 import java.io.IOException;
@@ -15,15 +15,16 @@ public class PointLight {
 
     private Attenuation attenuation;
 
-    private GameItem gameItem;
+    private final GameItem gameItem;
 
     public PointLight(Vector3f color, Vector3f position, float intensity) throws IOException {
         attenuation = new Attenuation(1, 0, 0);
         this.color = color;
         this.position = position;
         this.intensity = intensity;
-        this.gameItem = new Cube().createGameItem();
+        this.gameItem = new Piramid().createGameItem();
         this.gameItem.setPosition(position);
+        this.gameItem.setRotation(-90,0,45);
         this.gameItem.setScale(0.5f);
     }
 

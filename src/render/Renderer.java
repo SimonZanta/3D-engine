@@ -18,11 +18,11 @@ public class Renderer {
 
     private final ShaderProgram shaderProgram;
     private final Transformation transformation;
-    private float fov = (float) Math.toRadians(60.0f);
-    private float zNear = 0.01f;
-    private float zFar = 1000.f;
-    private Camera camera;
-    private float specularPower;
+    private final float fov = (float) Math.toRadians(60.0f);
+    private final float zNear = 0.01f;
+    private final float zFar = 1000.f;
+    private final Camera camera;
+    private final float specularPower;
 
     public Renderer(ShaderProgram shaderProgram, Camera newCamera) throws Exception {
         this.shaderProgram = shaderProgram;
@@ -41,7 +41,7 @@ public class Renderer {
 
         Matrix4f viewMatrix = transformation.getViewMatrix(camera);
 
-        PointLight currPointLight = pointLight;
+        PointLight currPointLight = new PointLight(pointLight);
         Vector3f lightPos = currPointLight.getPosition();
         Vector4f aux = new Vector4f(lightPos, 1);
         aux.mul(viewMatrix);
@@ -62,6 +62,17 @@ public class Renderer {
             Matrix4f modelViewMatrix = transformation.getModelViewMatrix(gameItem, viewMatrix);
 
             shaderProgram.setUniform("modelViewMatrix", modelViewMatrix);
+
+            if(gameItem.isHasAnimation()){
+                gameItem.playAnimation();
+            }
+
+//            float rotation = gameItem.getRotation().y + 0.5f;
+//            if ( rotation > 360 ) {
+//                rotation = 0;
+//            }
+//
+//            gameItem.setRotation(0, rotation, 0);
 
             gameItem.getMesh().render();
         }

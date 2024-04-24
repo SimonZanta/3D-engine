@@ -20,7 +20,7 @@ public class Mesh {
     private final int vboPosId;
     private final int vboInxId;
     private final int vertexCount;
-    private Material material;
+    private final Material material;
 //    private Texture texture;
 //    private Vector3f color;
 

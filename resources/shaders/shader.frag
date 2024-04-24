@@ -100,6 +100,4 @@ void main()
 	vec4 diffuseSpecComp = calcPointLight(pointLight, fragPos, calulatedNormal);
 
 	fragColor = ambientC * vec4(ambientLight, 1) + diffuseSpecComp;
-
-//	fragColor = vec4(calulatedNormal, 1.0); // Preview normals instead of 'result'
 }
