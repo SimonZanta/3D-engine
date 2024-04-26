@@ -19,6 +19,9 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
+// created by Simon Zanta as part of university credit course
+// published in 2024
+
 public class Run {
     long window;
     private final Vector2d prevPos = new Vector2d(0,0);
