@@ -3,6 +3,7 @@ package engine.item.objects;
 import engine.Texture;
 import engine.item.GameItem;
 import engine.item.Mesh;
+import org.joml.Vector3f;
 
 public abstract class Object {
 
@@ -34,6 +35,10 @@ public abstract class Object {
 
     public GameItem createGameItem(){
         return new GameItem(createMesh(), isHasAnimation());
+    }
+
+    public GameItem createGameItem(Vector3f rotation){
+        return new GameItem(createMesh(), isHasAnimation(),rotation);
     }
 
 }

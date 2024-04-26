@@ -8,7 +8,7 @@ public class GameItem {
     private float scale;
     private final Vector3f rotation;
     private boolean hasAnimation;
-    private int prevRotation = 0;
+    private Vector3f prevRotation = new Vector3f(0,0,0);
     private boolean changeAnimDirection = false;
 
     public GameItem(Mesh mesh, boolean hasAnimation) {
@@ -19,22 +19,35 @@ public class GameItem {
         this.scale = 1;
     }
 
+    public GameItem(Mesh mesh, boolean hasAnimation, Vector3f rotation) {
+        this.mesh = mesh;
+        this.hasAnimation = hasAnimation;
+        this.position = new Vector3f(0,0,0);
+        this.rotation = rotation;
+        this.prevRotation = rotation;
+        this.scale = 1;
+    }
+
     public void playAnimation(){
         if (changeAnimDirection){
-            int currentRotation = prevRotation - 1;
-            if(currentRotation < -360){
-                currentRotation = 0;
+            Vector3f currentRotation = new Vector3f(prevRotation.x, prevRotation.y - 1, prevRotation.z);
+            if(currentRotation.y < -360){
+                currentRotation.y = 0;
             }
-            setRotation(0, currentRotation, 0);
+            setRotation(currentRotation);
             prevRotation = currentRotation;
         }else{
-            int currentRotation = prevRotation + 1;
-            if(currentRotation > 360){
-                currentRotation = 0;
+            Vector3f currentRotation = new Vector3f(prevRotation.x, prevRotation.y + 1, prevRotation.z);
+            if(currentRotation.y > 360){
+                currentRotation.y = 0;
             }
-            setRotation(0, currentRotation, 0);
+            setRotation(currentRotation);
             prevRotation = currentRotation;
         }
+    }
+
+    public Vector3f getPrevRotation() {
+        return prevRotation;
     }
 
     public boolean isChangeAnimDirection() {
@@ -85,6 +98,12 @@ public class GameItem {
         this.rotation.x = x;
         this.rotation.y = y;
         this.rotation.z = z;
+    }
+
+    public void setRotation(Vector3f rotation){
+        this.rotation.x = rotation.x;
+        this.rotation.y = rotation.y;
+        this.rotation.z = rotation.z;
     }
 
     public Mesh getMesh() {

@@ -173,7 +173,8 @@ public class Run {
                     case GLFW_KEY_P:
                         if(isCubeTextured){
                             try {
-                                cube = new Cube().createGameItem();
+                                Vector3f prevRotation = gameItems.get(1).getPrevRotation();
+                                cube = new Cube().createGameItem(prevRotation);
                                 gameItems.remove(1);
                                 gameItems.add(cube);
                                 isCubeTextured = false;
@@ -182,7 +183,8 @@ public class Run {
                             }
                         }else{
                             try {
-                                cube = new Cube("/model/cube/rock.png", "/model/cube/rock_normals.png").createGameItem();
+                                Vector3f prevRotation = gameItems.get(1).getPrevRotation();
+                                cube = new Cube("/model/cube/rock.png", "/model/cube/rock_normals.png").createGameItem(prevRotation);
                                 gameItems.remove(1);
                                 gameItems.add(cube);
                                 isCubeTextured = true;
